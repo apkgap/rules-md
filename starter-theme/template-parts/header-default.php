@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 /**
  * Default Header Style — Multi-row layout with separate scrolled variant.
@@ -34,7 +34,7 @@ $position_class = function_exists('starter_theme_get_header_position_class')
 <header id="masthead" class="<?php echo esc_attr($position_class); ?> w-full transition-colors duration-300 <?php echo $is_home ? 'bg-bg-base' : 'bg-bg-base border-b border-border-base'; ?>"
 	:class="scrolled ? 'is-scrolled max-lg:fixed max-lg:top-0 max-lg:left-0 max-lg:right-0 max-lg:z-50 max-lg:shadow-md lg:opacity-0 lg:pointer-events-none' : ''"
 	style="background-color: var(--custom-header-bg, var(--bg-base)); color: var(--custom-header-text, var(--text-base));">
-	<div class="Starterbox-container px-[1.5em] md:px-[2em] lg:px-[5em" id="starter-theme-header-container">
+	<div id="starter-theme-header-container" class="Starterbox-container px-[1.5em] md:px-[2em] lg:px-[5em]">
 
 		<!-- MOBILE & TABLET HEADER -->
 		<div id="starter-theme-mobile-header" class="starter-theme-header__mobile flex lg:hidden items-center justify-between h-18">
@@ -130,7 +130,7 @@ $position_class = function_exists('starter_theme_get_header_position_class')
 					'menu_id'        => 'primary-menu',
 					'container'      => false,
 					'menu_class'     => 'starter-theme-nav__list flex items-center gap-1 h-full m-0',
-					'items_wrap'     => '<ul class="%2$s" id="starter-theme-primary-menu">%3$s</ul>',
+					'items_wrap'     => '<ul id="starter-theme-primary-menu" class="%2$s">%3$s</ul>',
 					'fallback_cb'    => false,
 				);
 				if ($menu_walker) $args['walker'] = $menu_walker;
@@ -217,7 +217,7 @@ $position_class = function_exists('starter_theme_get_header_position_class')
 					'menu_id'        => 'primary-menu-scrolled',
 					'container'      => false,
 					'menu_class'     => 'starter-theme-nav__list flex items-center gap-1 h-full m-0',
-					'items_wrap'     => '<ul class="%2$s" id="starter-theme-primary-menu-scrolled">%3$s</ul>',
+					'items_wrap'     => '<ul id="starter-theme-primary-menu-scrolled" class="%2$s">%3$s</ul>',
 					'fallback_cb'    => false,
 				);
 				if ($menu_walker) $args['walker'] = $menu_walker;

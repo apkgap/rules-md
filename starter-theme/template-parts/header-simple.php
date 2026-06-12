@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 /**
  * Simple Header Style — Single-row layout.
@@ -83,7 +83,7 @@ $bg_classes = $transparent_home
 				'menu_id'        => 'primary-menu',
 				'container'      => false,
 				'menu_class'     => 'starter-theme-nav__list flex items-center gap-0 h-full m-0',
-				'items_wrap'     => '<ul class="%2$s" id="starter-theme-primary-menu">%3$s</ul>',
+				'items_wrap'     => '<ul id="starter-theme-primary-menu" class="%2$s">%3$s</ul>',
 				'fallback_cb'    => false,
 			);
 			if ($menu_walker) $args['walker'] = $menu_walker;
