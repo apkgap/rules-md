@@ -1,0 +1,182 @@
+﻿/* ==========================================================================
+   KU LOCATION TABS WIDGET STYLES
+   ========================================================================== */
+
+/* Keyframe for fluid content entry */
+@keyframes epKuTabFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(16px) scale(0.995);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.starter-starter-location-tabs {
+  --starter-starter-tabs-gap: 12px;
+  width: 100%;
+}
+
+/* Horizontal & Scrollable Navigation Tab Bar */
+.starter-starter-location-tabs__nav-wrap {
+  width: 100%;
+}
+
+.starter-starter-location-tabs__nav {
+  gap: var(--starter-starter-tabs-gap, 12px);
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;  /* IE and Edge */
+}
+
+.starter-starter-location-tabs__nav::-webkit-scrollbar {
+  display: none; /* Chrome, Safari, Opera */
+}
+
+/* Base Tab Button */
+.starter-starter-location-tabs__tab {
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: 600;
+  border: 1px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  flex-shrink: 0;
+}
+
+.starter-starter-location-tabs__tab:hover {
+  transform: translateY(-1px);
+}
+
+.starter-starter-location-tabs__tab--active {
+  box-shadow: 0 8px 20px rgba(236, 0, 140, 0.15);
+  transform: translateY(-1px);
+}
+
+/* Detail Panes Wrapper */
+.starter-starter-location-tabs__panes {
+  width: 100%;
+}
+
+.starter-starter-location-tabs__pane {
+  display: none;
+  background-color: #ffffff;
+  box-sizing: border-box;
+  overflow: hidden;
+}
+
+.starter-starter-location-tabs__pane--active {
+  display: block;
+  animation: epKuTabFadeIn 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* Vertical Sidebar Layout (Desktop) */
+@media (min-width: 1024px) {
+  .starter-starter-location-tabs--layout-vertical {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 40px;
+  }
+
+  .starter-starter-location-tabs--layout-vertical .starter-starter-location-tabs__nav-wrap {
+    width: 280px;
+    flex-shrink: 0;
+  }
+
+  .starter-starter-location-tabs--layout-vertical .starter-starter-location-tabs__nav {
+    flex-direction: column;
+    overflow-x: visible;
+  }
+
+  .starter-starter-location-tabs--layout-vertical .starter-starter-location-tabs__tab {
+    width: 100%;
+    text-align: left;
+    white-space: normal;
+  }
+
+  .starter-starter-location-tabs--layout-vertical .starter-starter-location-tabs__panes {
+    flex-grow: 1;
+    width: auto;
+  }
+}
+
+/* Image Column Hover effects */
+.starter-starter-location-tabs__image-col {
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Phone and Social CTAs Micro-interactions */
+.starter-starter-location-tabs__phone-card {
+  text-decoration: none !important;
+}
+
+.starter-starter-location-tabs__social-btn {
+  text-decoration: none !important;
+  color: #ffffff;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Subtle typography reset for custom WYSIWYG addresses */
+.starter-starter-location-tabs__desc p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+.starter-starter-location-tabs__desc p:last-child {
+  margin-bottom: 0;
+}
+
+/* ==========================================================================
+   Google Maps Button & Social Repeater Styles
+   ========================================================================== */
+.starter-starter-location-tabs__map-btn-wrap {
+  width: 100%;
+  display: flex;
+  margin-top: 16px;
+}
+
+.starter-starter-location-tabs__map-btn {
+  text-decoration: none !important;
+  color: #FFFFFF !important;
+  background-color: var(--color-primary, #EA4F89);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  box-shadow: 0 4px 14px rgba(234, 79, 137, 0.2);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.starter-starter-location-tabs__map-btn:hover {
+  transform: translateY(-2px);
+  background-color: #C40072 !important;
+  box-shadow: 0 6px 20px rgba(234, 79, 137, 0.35);
+}
+
+.starter-starter-location-tabs__map-btn:active {
+  transform: translateY(0);
+}
+
+.starter-starter-location-tabs__social-btn {
+  text-decoration: none !important;
+  color: #FFFFFF !important;
+  background-color: var(--color-primary, #EA4F89) !important;
+  box-shadow: 0 4px 10px rgba(234, 79, 137, 0.15);
+}
+
+.starter-starter-location-tabs__social-btn:hover {
+  background-color: #C40072 !important;
+  box-shadow: 0 6px 15px rgba(234, 79, 137, 0.3);
+}
+
+.starter-starter-location-tabs__social-btn svg {
+  width: 16px;
+  height: 16px;
+  fill: currentColor;
+}
+

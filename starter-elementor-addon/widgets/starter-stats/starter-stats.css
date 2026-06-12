@@ -1,0 +1,162 @@
+﻿/**
+ * Stylesheet for EP KU Stats Banner Widget
+ * Premium visual aesthetics, fully responsive, and highly animated.
+ */
+
+/* ========================================
+   WIDGET WRAPPER
+   ======================================== */
+.starter-starter-stats-wrapper {
+    width: 100%;
+}
+
+/* ========================================
+   GRID BANNER CONTAINER
+   ======================================== */
+.starter-starter-stats-grid {
+    display: grid;
+    /* Respect Rule 2.2: Do not mix flex and grid. Columns set via CSS variables */
+    grid-template-columns: repeat(var(--starter-starter-stats-cols, 4), 1fr);
+    gap: var(--starter-starter-stats-gap, 24px);
+    width: 100%;
+    align-items: center;
+    box-sizing: border-box;
+    transition: background 0.4s ease, border-radius 0.4s ease, padding 0.4s ease;
+    
+    /* Configurable dividers settings */
+    --starter-starter-stats-divider-width: 1px;
+    --starter-starter-stats-divider-color: rgba(236, 0, 140, 0.15);
+    --starter-starter-stats-divider-style: solid;
+}
+
+/* Default light pink gradient background */
+.starter-starter-stats-grid--pink-gradient {
+    background: linear-gradient(90deg, #FFF1F4 0%, #FFF9FA 100%);
+    border: 1px solid rgba(236, 0, 140, 0.04);
+    box-shadow: 0 10px 30px -10px rgba(236, 0, 140, 0.06);
+}
+
+/* ========================================
+   STATS ITEM CARD & DIVIDERS (RULE 2.3)
+   ======================================== */
+.starter-starter-stats__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    box-sizing: border-box;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Hover micro-animation */
+.starter-starter-stats__item:hover {
+    transform: translateY(-3px);
+}
+
+/* Responsive vertical dividers - Conforms to Rule 2.3 */
+.starter-starter-stats-grid--has-dividers .starter-starter-stats__item:not(:last-child) {
+    border-right: var(--starter-starter-stats-divider-width) var(--starter-starter-stats-divider-style) var(--starter-starter-stats-divider-color);
+}
+
+/* Guarantee the last-child never gets a right-border (Strict rule check) */
+.starter-starter-stats-grid--has-dividers .starter-starter-stats__item:last-child {
+    border-right: none !important;
+}
+
+/* ========================================
+   STAT ICON & WRAP
+   ======================================== */
+.starter-starter-stats__icon-wrap {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.starter-starter-stats__item:hover .starter-starter-stats__icon-wrap {
+    transform: scale(1.08) rotate(3deg);
+}
+
+/* Premium outline-looking SVG/Font Awesome icons */
+.starter-starter-stats__icon {
+    font-size: 46px;
+    color: var(--color-primary, #EC008C);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 1;
+}
+
+.starter-starter-stats__icon svg {
+    width: 1em;
+    height: 1em;
+    fill: currentColor;
+}
+
+.starter-starter-stats__icon svg.custom-outline-svg {
+    fill: none;
+    stroke: currentColor;
+}
+
+/* ========================================
+   STAT NUMBERS & LABELS
+   ======================================== */
+.starter-starter-stats__content {
+    display: flex;
+    flex-direction: column;
+}
+
+.starter-starter-stats__number {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--color-primary, #EC008C);
+    letter-spacing: -0.02em;
+    margin-bottom: 4px;
+}
+
+.starter-starter-stats__label {
+    font-size: 13px;
+    font-weight: 500;
+    color: #475569;
+    line-height: 1.3;
+    margin: 0;
+    word-break: break-word;
+}
+
+/* ========================================
+   RESPONSIVE SCALING
+   ======================================== */
+@media (max-width: 1024px) {
+    .starter-starter-stats-grid {
+        grid-template-columns: repeat(var(--starter-starter-stats-cols-tablet, 2), 1fr);
+        row-gap: 30px;
+    }
+    
+    /* When layout wraps, clean up standard single-line dividers */
+    .starter-starter-stats-grid--has-dividers .starter-starter-stats__item {
+        border-right: none !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .starter-starter-stats-grid {
+        grid-template-columns: repeat(var(--starter-starter-stats-cols-mobile, 1), 1fr);
+        row-gap: 24px;
+        text-align: center;
+    }
+
+    .starter-starter-stats__item {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .starter-starter-stats__icon-wrap {
+        margin-right: 0 !important;
+        margin-bottom: 12px;
+    }
+
+    .starter-starter-stats__content {
+        align-items: center;
+    }
+}

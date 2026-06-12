@@ -1,0 +1,277 @@
+﻿/**
+ * Stylesheet for EP KU Treatment Steps Widget
+ * Premium visual aesthetics, fully responsive, and highly animated.
+ */
+
+/* ========================================
+   WIDGET WRAPPER
+   ======================================== */
+.starter-starter-steps-wrapper {
+    width: 100%;
+}
+
+.starter-starter-steps-header {
+    margin-bottom: 48px;
+}
+
+.starter-starter-steps-header__title {
+    font-size: 32px;
+    font-weight: 700;
+    line-height: 1.3;
+    margin: 0;
+    color: #0f172a;
+}
+
+/* ========================================
+   GRID CONTAINER & LINE CONNECTORS
+   ======================================== */
+.starter-starter-steps-grid {
+    display: grid;
+    /* Respect Rule 2.2: Do not mix flex and grid. Controlled via CSS variables */
+    grid-template-columns: repeat(var(--starter-starter-steps-cols, 5), 1fr);
+    column-gap: var(--starter-starter-steps-gap, 20px);
+    row-gap: 40px;
+    width: 100%;
+    position: relative;
+    
+    /* Stepper Line settings */
+    --starter-starter-ststarter-line-style: dashed;
+    --starter-starter-ststarter-line-color: rgba(236, 0, 140, 0.25);
+    --starter-starter-ststarter-line-width: 1px;
+}
+
+/* ========================================
+   STEP ITEM CONTAINER
+   ======================================== */
+.starter-starter-steps__item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+}
+
+/* ========================================
+   GRAPHIC WRAP (CIRCLE + BADGE + LINE)
+   ======================================== */
+.starter-starter-steps__graphic-wrap {
+    width: 120px;
+    height: 120px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2; /* Sits above the connecting dotted lines */
+}
+
+/* Concentric circular step borders (solid outer, dashed inner) */
+.starter-starter-steps__circle {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: var(--starter-starter-ststarter-circle-bg, #fffcfd);
+    border: 1px solid var(--starter-starter-ststarter-border-outer, rgba(236, 0, 140, 0.35));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0px 8px 24px rgba(236, 0, 140, 0.03);
+    transition: border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                background-color 0.4s ease,
+                transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                box-shadow 0.4s ease;
+}
+
+/* Dashed Inner ring concentric border */
+.starter-starter-steps__circle::before {
+    content: '';
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    right: 8px;
+    bottom: 8px;
+    border-radius: 50%;
+    border: 1px dashed var(--starter-starter-ststarter-border-inner, rgba(236, 0, 140, 0.12));
+    transition: border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Inner concentric ring hover animations */
+.starter-starter-steps__item:hover .starter-starter-steps__circle {
+    transform: scale(1.04);
+    box-shadow: 0px 12px 30px rgba(236, 0, 140, 0.10);
+}
+
+.starter-starter-steps__item:hover .starter-starter-steps__circle::before {
+    transform: rotate(45deg); /* Subtle spinning dashed border on hover! */
+}
+
+/* Main Step Icon */
+.starter-starter-steps__icon {
+    font-size: 32px;
+    color: var(--starter-starter-circle-icon-color, var(--color-primary, #EC008C));
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.starter-starter-steps__item:hover .starter-starter-steps__icon {
+    transform: scale(1.1);
+}
+
+/* SVG Rendering compatibility */
+.starter-starter-steps__icon svg {
+    width: 32px;
+    height: 32px;
+    fill: currentColor;
+}
+
+/* ========================================
+   TOP-RIGHT MINI FLOATING BADGE
+   ======================================== */
+.starter-starter-steps__badge {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background-color: var(--starter-starter-ststarter-badge-bg, #fffcfd);
+    border: 1px solid var(--starter-starter-ststarter-badge-border, rgba(236, 0, 140, 0.25));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.05);
+    z-index: 3;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.starter-starter-steps__badge i {
+    font-size: 11px;
+    color: var(--starter-starter-ststarter-badge-icon, var(--color-primary, #EC008C));
+}
+
+.starter-starter-steps__badge svg {
+    width: 11px;
+    height: 11px;
+    fill: var(--starter-starter-ststarter-badge-icon, var(--color-primary, #EC008C));
+}
+
+/* Hover pop micro-animation for the mini badge */
+.starter-starter-steps__item:hover .starter-starter-steps__badge {
+    transform: scale(1.15) translate(2px, -2px);
+}
+
+/* ========================================
+   HORIZONTAL CONNECTING DOTTED LINE
+   ======================================== */
+/* Conforming to responsive connecting line:
+   Draw connector line on .starter-starter-steps__item to allow dynamic 100% grid width matching. */
+.starter-starter-steps__item::after {
+    content: '';
+    position: absolute;
+    top: 60px; /* Center of the 120px circle */
+    left: 50%;
+    width: calc(100% + var(--starter-starter-steps-gap, 20px));
+    height: 0;
+    border-top: var(--starter-starter-ststarter-line-width, 1px) var(--starter-starter-ststarter-line-style, dashed) var(--starter-starter-ststarter-line-color, rgba(236, 0, 140, 0.25));
+    transform: translateY(-50%);
+    z-index: 0; /* Behind circles which have solid backgrounds and z-index: 1 */
+}
+
+/* Last step item should not extend any connecting lines */
+.starter-starter-steps__item--last::after {
+    display: none !important;
+}
+
+/* ========================================
+   STEP TEXTS & SEQUENTIAL NUMBERS
+   ======================================== */
+.starter-starter-steps__content {
+    width: 100%;
+}
+
+.starter-starter-steps__number {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1;
+    color: var(--color-primary, #EC008C);
+}
+
+.starter-starter-steps__title {
+    font-size: 18px;
+    font-weight: 600;
+    line-height: 1.4;
+    color: #1e293b;
+    margin: 0;
+    transition: color 0.3s ease;
+}
+
+.starter-starter-steps__desc {
+    font-size: 14px;
+    line-height: 1.6;
+    color: #64748b;
+}
+
+.starter-starter-steps__item:hover .starter-starter-steps__title {
+    color: var(--color-primary, #EC008C);
+}
+
+/* ========================================
+   RESPONSIVE SCALING & MOBILE TIMELINE
+   ======================================== */
+@media (max-width: 1024px) {
+    .starter-starter-steps-grid {
+        grid-template-columns: repeat(var(--starter-starter-steps-cols-tablet, 3), 1fr);
+    }
+    
+    /* Since columns break, traditional horizontal connectors are hidden */
+    .starter-starter-steps__item::after {
+        display: none !important;
+    }
+}
+
+@media (max-width: 767px) {
+    .starter-starter-steps-grid {
+        grid-template-columns: repeat(var(--starter-starter-steps-cols-mobile, 1), 1fr);
+        row-gap: 30px;
+    }
+    
+    /* Convert horizontal stepper into a vertical elegant list */
+    .starter-starter-steps__item {
+        flex-direction: row;
+        align-items: flex-start;
+        text-align: left;
+    }
+
+    .starter-starter-steps__graphic-wrap {
+        margin-right: 20px;
+        flex-shrink: 0;
+    }
+
+    .starter-starter-steps__content {
+        text-align: left;
+        padding-top: 10px !important;
+    }
+    
+    /* Build vertical dotted timeline connector on mobile */
+    .starter-starter-steps__item::after {
+        display: block !important;
+        content: '';
+        position: absolute;
+        top: 60px; /* Center of the circle */
+        left: 60px; /* Horizontal center of the 120px circle (aligned left on mobile) */
+        width: 0;
+        height: calc(100% + 30px); /* Stretch downwards past the mobile gap */
+        border-top: none;
+        border-left: var(--starter-starter-ststarter-line-width, 1px) var(--starter-starter-ststarter-line-style, dashed) var(--starter-starter-ststarter-line-color, rgba(236, 0, 140, 0.25));
+        transform: translateX(-50%);
+        z-index: 0;
+    }
+    
+    .starter-starter-steps__item--last::after {
+        display: none !important;
+    }
+}

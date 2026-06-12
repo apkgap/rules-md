@@ -1,0 +1,253 @@
+﻿/* ==========================================================================
+   KU DIRECTIONS & SOCIAL INFO WIDGET STYLES
+   ========================================================================== */
+
+.starter-starter-directions-social {
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Card Container Styles */
+.starter-starter-directions-social__card {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: #FFF8FA;
+  border-radius: 32px;
+  box-shadow: 0 10px 30px rgba(236, 0, 140, 0.02);
+  transition: all 0.3s ease;
+}
+
+/* Header Section styling */
+.starter-starter-directions-social__header-wrap {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.starter-starter-directions-social__subtitle {
+  display: block;
+  margin-top: 0;
+  margin-bottom: 6px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--color-primary, #EA4F89);
+  line-height: 1.2;
+}
+
+/* Main Heading Title */
+.starter-starter-directions-social__main-title {
+  margin-top: 0;
+  margin-bottom: 12px;
+  font-family: inherit;
+  font-size: 22px;
+  font-weight: 700;
+  color: #2c003e;
+  line-height: 1.2;
+}
+
+.starter-starter-directions-social__header-content {
+  margin-top: 0;
+  margin-bottom: 24px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  color: #475569;
+  line-height: 1.6;
+}
+
+/* List Items Wrapper */
+.starter-starter-directions-social__list {
+  --starter-starter-directions-gap: 24px;
+  --starter-starter-divider-color: rgba(236, 0, 140, 0.08);
+  --starter-starter-divider-width: 1px;
+  --starter-starter-divider-style: solid;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Base List Item layout */
+.starter-starter-directions-social__item {
+  width: 100%;
+  box-sizing: border-box;
+  transition: all 0.3s ease;
+}
+
+/* Divider rules complying with KUSMILE last-child exception Rule 2.3 */
+.starter-starter-directions-social__list--show-dividers .starter-starter-directions-social__item:not(:last-child) {
+  border-bottom: var(--starter-starter-divider-width, 1px) var(--starter-starter-divider-style, solid) var(--starter-starter-divider-color, rgba(236, 0, 140, 0.08));
+  padding-bottom: calc(var(--starter-starter-directions-gap, 24px) / 2);
+  margin-bottom: calc(var(--starter-starter-directions-gap, 24px) / 2);
+}
+
+.starter-starter-directions-social__list:not(.starter-starter-directions-social__list--show-dividers) .starter-starter-directions-social__item:not(:last-child) {
+  margin-bottom: var(--starter-starter-directions-gap, 24px);
+}
+
+/* Left Icon circular wrapper with subtle zoom micro-interaction */
+.starter-starter-directions-social__icon-wrap {
+  width: 54px;
+  height: 54px;
+  background-color: rgba(236, 0, 140, 0.08);
+  color: var(--color-primary, #EC008C);
+  border-radius: 50%;
+  margin-right: 20px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  box-shadow: 0 4px 10px rgba(236, 0, 140, 0.02);
+}
+
+.starter-starter-directions-social__item:hover .starter-starter-directions-social__icon-wrap {
+  transform: scale(1.06);
+  box-shadow: 0 6px 15px rgba(236, 0, 140, 0.1);
+  background-color: var(--color-primary, #EC008C) !important;
+  color: #ffffff !important;
+}
+
+.starter-starter-directions-social__icon-wrap i {
+  font-size: 22px;
+  line-height: 1;
+}
+
+.starter-starter-directions-social__icon-wrap svg {
+  width: 22px;
+  height: 22px;
+  fill: currentColor;
+  display: block;
+}
+
+/* Right text content wrapper */
+.starter-starter-directions-social__content {
+  flex-grow: 1;
+  min-width: 0;
+  padding-top: 4px; /* Align slightly vertically centered to icons */
+}
+
+.starter-starter-directions-social__item-title {
+  margin-top: 0;
+  margin-bottom: 4px;
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.3;
+}
+
+.starter-starter-directions-social__item-desc {
+  margin: 0;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 400;
+  color: #475569;
+  line-height: 1.5;
+  white-space: pre-line; /* Renders line breaks for transport times nicely */
+}
+
+/* ==========================================================================
+   Map Button Styles
+   ========================================================================== */
+.starter-starter-directions-social__map-btn-wrap {
+  width: 100%;
+  display: flex;
+  margin-top: 28px;
+}
+
+.starter-starter-directions-social__map-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #EA4F89;
+  color: #FFFFFF;
+  text-decoration: none !important;
+  box-shadow: 0 4px 14px rgba(234, 79, 137, 0.25);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  font-weight: 700;
+  width: 100%;
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(234, 79, 137, 0.4);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.starter-starter-directions-social__map-btn-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+
+  i {
+    font-size: 18px;
+  }
+  
+  svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+  }
+}
+
+.starter-starter-directions-social__map-btn-text {
+  font-family: inherit;
+  line-height: 1;
+}
+
+/* ==========================================================================
+   Social Buttons Styles
+   ========================================================================== */
+.starter-starter-directions-social__social-wrap {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--starter-starter-divider-color, rgba(236, 0, 140, 0.08));
+}
+
+.starter-starter-directions-social__social-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #EA4F89;
+  color: #FFFFFF;
+  text-decoration: none !important;
+  box-shadow: 0 4px 10px rgba(234, 79, 137, 0.15);
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(234, 79, 137, 0.3);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+.starter-starter-directions-social__social-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+
+  i {
+    font-size: 16px;
+  }
+  
+  svg {
+    width: 16px;
+    height: 16px;
+    fill: currentColor;
+  }
+}
+
+.starter-starter-directions-social__social-text {
+  font-family: inherit;
+  line-height: 1;
+}

@@ -1,0 +1,223 @@
+﻿/**
+ * Stylesheet for EP KU Info Cards Widget
+ * Premium visual aesthetics, fully responsive, and highly animated.
+ */
+
+/* ========================================
+   GRID CONTAINER
+   ======================================== */
+.starter-starter-info-cards-grid {
+    display: grid;
+    /* Respect Rule 2.2: Do not mix flex and grid on same class. Columns set via CSS variables. */
+    grid-template-columns: repeat(var(--starter-starter-grid-cols, 4), minmax(0, 1fr));
+    gap: var(--starter-starter-grid-gap, 24px);
+    width: 100%;
+}
+
+/* Responsive grid fallbacks */
+@media (max-width: 1024px) {
+    .starter-starter-info-cards-grid {
+        grid-template-columns: repeat(var(--starter-starter-grid-cols-tablet, var(--starter-starter-grid-cols, 2)), minmax(0, 1fr));
+        gap: var(--starter-starter-grid-gap-tablet, var(--starter-starter-grid-gap, 24px));
+    }
+}
+
+@media (max-width: 767px) {
+    .starter-starter-info-cards-grid {
+        grid-template-columns: repeat(var(--starter-starter-grid-cols-mobile, var(--starter-starter-grid-cols-tablet, 1)), minmax(0, 1fr));
+        gap: var(--starter-starter-grid-gap-mobile, var(--starter-starter-grid-gap-tablet, var(--starter-starter-grid-gap, 24px)));
+    }
+}
+
+/* ========================================
+   CARD WRAPPER
+   ======================================== */
+.starter-starter-info-card {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    text-decoration: none;
+    background-color: var(--starter-starter-card-bg-color, #ffffff);
+    border-radius: var(--starter-starter-card-border-radius, 24px);
+    padding: var(--starter-starter-card-padding, 40px 24px);
+    border: var(--starter-starter-card-border-width, 0px) solid var(--starter-starter-card-border-color, #eef2f6);
+    box-sizing: border-box;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), 
+                box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+                border-color 0.3s ease,
+                background-color 0.3s ease;
+    outline: none;
+    position: relative;
+    overflow: hidden;
+}
+
+@media (max-width: 1024px) {
+    .starter-starter-info-card {
+        border-radius: var(--starter-starter-card-border-radius-tablet, var(--starter-starter-card-border-radius, 24px));
+        padding: var(--starter-starter-card-padding-tablet, var(--starter-starter-card-padding, 40px 24px));
+    }
+}
+
+@media (max-width: 767px) {
+    .starter-starter-info-card {
+        border-radius: var(--starter-starter-card-border-radius-mobile, var(--starter-starter-card-border-radius-tablet, var(--starter-starter-card-border-radius, 24px)));
+        padding: var(--starter-starter-card-padding-mobile, var(--starter-starter-card-padding-tablet, var(--starter-starter-card-padding, 40px 24px)));
+    }
+}
+
+/* Premium Hover Micro-animations */
+.starter-starter-info-card:hover {
+    transform: translateY(var(--starter-starter-card-hover-y, -8px));
+    box-shadow: 0px 20px 40px rgba(0, 0, 0, 0.06);
+    text-decoration: none;
+}
+
+@media (max-width: 1024px) {
+    .starter-starter-info-card:hover {
+        transform: translateY(var(--starter-starter-card-hover-y-tablet, var(--starter-starter-card-hover-y, -8px)));
+    }
+}
+
+@media (max-width: 767px) {
+    .starter-starter-info-card:hover {
+        transform: translateY(var(--starter-starter-card-hover-y-mobile, var(--starter-starter-card-hover-y-tablet, var(--starter-starter-card-hover-y, -8px))));
+    }
+}
+
+/* Active State Press Effect */
+.starter-starter-info-card:active {
+    transform: translateY(calc(var(--starter-starter-card-hover-y, -8px) / 2)) scale(0.98);
+}
+
+@media (max-width: 1024px) {
+    .starter-starter-info-card:active {
+        transform: translateY(calc(var(--starter-starter-card-hover-y-tablet, var(--starter-starter-card-hover-y, -8px)) / 2)) scale(0.98);
+    }
+}
+
+@media (max-width: 767px) {
+    .starter-starter-info-card:active {
+        transform: translateY(calc(var(--starter-starter-card-hover-y-mobile, var(--starter-starter-card-hover-y-tablet, var(--starter-starter-card-hover-y, -8px))) / 2)) scale(0.98);
+    }
+}
+
+/* Accessibility Focus Ring */
+.starter-starter-info-card:focus-visible {
+    outline: 2px solid var(--starter-starter-icon-color, #ff4a7d);
+    outline-offset: 4px;
+}
+
+/* ========================================
+   CARD CONTENT INNER
+   ======================================== */
+.starter-starter-info-card-inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    height: 100%;
+    justify-content: flex-start;
+}
+
+/* ========================================
+   ICON STYLING
+   ======================================== */
+.starter-starter-info-card-icon-wrapper {
+    margin-bottom: var(--starter-starter-icon-spacing, 20px);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@media (max-width: 1024px) {
+    .starter-starter-info-card-icon-wrapper {
+        margin-bottom: var(--starter-starter-icon-spacing-tablet, var(--starter-starter-icon-spacing, 20px));
+    }
+}
+
+@media (max-width: 767px) {
+    .starter-starter-info-card-icon-wrapper {
+        margin-bottom: var(--starter-starter-icon-spacing-mobile, var(--starter-starter-icon-spacing-tablet, var(--starter-starter-icon-spacing, 20px)));
+    }
+}
+
+.starter-starter-info-card-icon {
+    font-size: var(--starter-starter-icon-size, 48px);
+    color: var(--starter-starter-icon-color, #ff4a7d);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.3s ease, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    line-height: 1;
+}
+
+/* SVG Rendering Support */
+.starter-starter-info-card-icon svg {
+    width: var(--starter-starter-icon-size, 48px);
+    height: var(--starter-starter-icon-size, 48px);
+    fill: currentColor;
+    transition: fill 0.3s ease;
+}
+
+@media (max-width: 1024px) {
+    .starter-starter-info-card-icon {
+        font-size: var(--starter-starter-icon-size-tablet, var(--starter-starter-icon-size, 48px));
+    }
+    .starter-starter-info-card-icon svg {
+        width: var(--starter-starter-icon-size-tablet, var(--starter-starter-icon-size, 48px));
+        height: var(--starter-starter-icon-size-tablet, var(--starter-starter-icon-size, 48px));
+    }
+}
+
+@media (max-width: 767px) {
+    .starter-starter-info-card-icon {
+        font-size: var(--starter-starter-icon-size-mobile, var(--starter-starter-icon-size-tablet, var(--starter-starter-icon-size, 48px)));
+    }
+    .starter-starter-info-card-icon svg {
+        width: var(--starter-starter-icon-size-mobile, var(--starter-starter-icon-size-tablet, var(--starter-starter-icon-size, 48px)));
+        height: var(--starter-starter-icon-size-mobile, var(--starter-starter-icon-size-tablet, var(--starter-starter-icon-size, 48px)));
+    }
+}
+
+/* Hover Icon Accent Shift */
+.starter-starter-info-card:hover .starter-starter-info-card-icon {
+    color: var(--starter-starter-icon-hover-color, #ff2a65);
+    transform: scale(1.08);
+}
+
+.starter-starter-info-card:hover .starter-starter-info-card-icon svg {
+    fill: var(--starter-starter-icon-hover-color, #ff2a65);
+}
+
+/* ========================================
+   TEXT & HEADINGS
+   ======================================== */
+.starter-starter-info-card-title {
+    color: var(--starter-starter-title-color, #0f172a);
+    margin: 0 0 var(--starter-starter-title-margin, 12px) 0;
+    transition: color 0.3s ease;
+    word-break: break-word;
+    font-family: inherit; /* Inherit Elementor defaults or active theme fonts */
+}
+
+@media (max-width: 1024px) {
+    .starter-starter-info-card-title {
+        margin: 0 0 var(--starter-starter-title-margin-tablet, var(--starter-starter-title-margin, 12px)) 0;
+    }
+}
+
+@media (max-width: 767px) {
+    .starter-starter-info-card-title {
+        margin: 0 0 var(--starter-starter-title-margin-mobile, var(--starter-starter-title-margin-tablet, var(--starter-starter-title-margin, 12px))) 0;
+    }
+}
+
+.starter-starter-info-card-desc {
+    color: var(--starter-starter-desc-color, #64748b);
+    margin: 0;
+    transition: color 0.3s ease;
+    word-break: break-word;
+    font-family: inherit;
+}
+

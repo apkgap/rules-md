@@ -1,0 +1,175 @@
+﻿/* ==========================================================================
+   KU CTA BANNER WIDGET CSS
+   ========================================================================== */
+
+.starter-cta-banner {
+	position: relative;
+	overflow: hidden;
+	background: linear-gradient(to right,
+			var(--starter-cta-from, var(--color-primary, #EC008C)),
+			var(--starter-cta-to, var(--secondary, #8E2BAF)));
+	transition: background 0.3s, border-radius 0.3s, box-shadow 0.3s;
+}
+
+.starter-cta-banner__bg {
+	position: absolute;
+	inset: 0;
+	width: 100%;
+	height: 100%;
+	object-fit: var(--bg-img-fit, cover);
+	object-position: var(--bg-img-x, 50%) var(--bg-img-y, 50%);
+	transform: translate3d(var(--bg-img-tx, 0px), var(--bg-img-ty, 0px), 0) scale(var(--bg-img-scale, 1));
+	opacity: var(--bg-img-opacity, 0.15);
+	pointer-events: none;
+	z-index: 0;
+}
+
+/* Flex layout with gap spacing */
+.starter-cta-banner__inner {
+	position: relative;
+	z-index: 1;
+	display: flex;
+	flex-direction: var(--inner-direction, column);
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--inner-gap, 24px);
+	width: 100%;
+}
+
+@media (min-width: 768px) {
+	.starter-cta-banner__inner {
+		flex-direction: var(--inner-direction, row);
+		gap: var(--inner-gap, 32px);
+	}
+}
+
+/* Mobile-first centered column content */
+.starter-cta-banner__content {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	gap: 16px;
+	width: 100%;
+}
+
+@media (min-width: 768px) {
+	.starter-cta-banner__content {
+		flex-direction: row;
+		align-items: center;
+		text-align: left;
+		gap: 20px;
+		width: auto;
+	}
+}
+
+.starter-cta-banner__icon-wrap {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	width: 56px;
+	height: 56px;
+	border-radius: 16px;
+	background-color: rgba(255, 255, 255, 0.2);
+	flex-shrink: 0;
+	transition: background-color 0.3s, transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.starter-cta-banner:hover .starter-cta-banner__icon-wrap {
+	transform: scale(1.08) rotate(-5deg);
+	background-color: rgba(255, 255, 255, 0.3);
+}
+
+.starter-cta-banner__icon {
+	color: #ffffff;
+	font-size: 28px;
+	transition: color 0.3s, font-size 0.3s;
+}
+
+.starter-cta-banner__text {
+	flex: 1;
+	min-width: 0;
+}
+
+.starter-cta-banner__title {
+	margin: 0;
+	color: #ffffff;
+	font-weight: 700;
+	line-height: 1.3;
+	font-family: var(--font-display, inherit);
+	font-size: 1.25rem;
+	text-align: center;
+	transition: color 0.3s, font-size 0.3s;
+}
+
+@media (min-width: 768px) {
+	.starter-cta-banner__title {
+		font-size: 1.5rem;
+		text-align: left;
+	}
+}
+
+.starter-cta-banner__subtitle {
+	margin: 6px 0 0;
+	color: rgba(255, 255, 255, 0.85);
+	font-weight: 400;
+	font-size: 13px;
+	line-height: 1.5;
+	text-align: center;
+	transition: color 0.3s, font-size 0.3s;
+}
+
+@media (min-width: 768px) {
+	.starter-cta-banner__subtitle {
+		font-size: 14px;
+		text-align: left;
+	}
+}
+
+/* Touch-friendly responsive button width */
+.starter-cta-banner__btn {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	background-color: #ffffff;
+	color: var(--color-primary, #EC008C);
+	font-weight: 700;
+	font-size: 15px;
+	border-radius: 12px;
+	padding: 14px 32px;
+	white-space: nowrap;
+	flex-shrink: 0;
+	width: 100%;
+	max-width: 340px;
+	box-shadow: 0 10px 20px rgba(0, 0, 0, 0.05);
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	text-decoration: none !important;
+}
+
+@media (min-width: 768px) {
+	.starter-cta-banner__btn {
+		width: auto;
+		max-width: none;
+	}
+}
+
+.starter-cta-banner__btn:hover,
+.starter-cta-banner__btn:focus {
+	background-color: rgba(255, 255, 255, 0.95);
+	transform: translateY(-2px);
+	box-shadow: 0 14px 24px rgba(0, 0, 0, 0.1);
+}
+
+.starter-cta-banner__btn:active {
+	transform: translateY(0);
+}
+
+.starter-cta-banner__btn-icon {
+	font-size: 18px;
+	transition: transform 0.3s;
+}
+
+.starter-cta-banner__btn:hover .starter-cta-banner__btn-icon {
+	transform: translateX(2px);
+}

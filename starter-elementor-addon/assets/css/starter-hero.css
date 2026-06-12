@@ -1,0 +1,30 @@
+﻿/* KU Hero Widget Styles */
+
+.starter-hero__slide-bg {
+    width: 100%;
+    height: 100%;
+}
+
+.starter-hero__slide-overlay {
+    width: 100%;
+    height: 100%;
+}
+
+.starter-hero__badge {
+    transition: all 0.3s ease;
+}
+
+.starter-hero__badge:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.starter-hero__slide-row {
+    min-height: 400px;
+}
+
+@media (max-width: 1024px) {
+    .starter-hero__slide-row {
+        min-height: auto;
+    }
+}

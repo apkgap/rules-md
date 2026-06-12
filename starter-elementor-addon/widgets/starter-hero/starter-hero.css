@@ -1,0 +1,358 @@
+﻿/* ── starter-hero.css ── */
+
+:root {
+	--bg-gradient-start: #FFF2F6;
+	--bg-gradient-end: #FFFFFF;
+	--bg-gradient-angle: 180deg;
+	--dots-color: rgba(244, 63, 94, 0.15);
+	--heart-color: #F43F5E;
+	--sparkle-color: #ffffff;
+}
+
+.starter-hero {
+	background: linear-gradient(var(--bg-gradient-angle), var(--bg-gradient-start) 0%, var(--bg-gradient-end) 100%);
+	position: relative;
+	width: 100%;
+}
+
+/* 1. DECORATIVE DOTTED GRID */
+.starter-hero__dot-grid {
+	background-image: radial-gradient(var(--dots-color) 2px, transparent 2px);
+	background-size: 20px 20px;
+}
+
+/* 2. ORGANIC IMAGE FRAME & SHADOWS */
+.starter-hero__image-container {
+	width: 100%;
+	height: 320px;
+	/* Mobile height */
+	border-style: solid;
+	transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+@media (min-width: 768px) {
+	.starter-hero__image-container {
+		height: 440px;
+	}
+}
+
+@media (min-width: 1024px) {
+	.starter-hero__image-container {
+		height: 500px;
+		width: 100%;
+		max-width: 480px;
+	}
+}
+
+.starter-hero__image {
+	width: 100%;
+	height: 100% !important;
+	object-fit: var(--image-object-fit, cover);
+	object-position: var(--image-object-x, 50%) var(--image-object-y, 50%);
+	transform: translate3d(var(--image-x, 0px), var(--image-y, 0px), 0) scale(var(--image-scale, 1));
+	transition: transform 0.7s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.starter-hero__image-container:hover .starter-hero__image {
+	transform: translate3d(var(--image-x, 0px), var(--image-y, 0px), 0) scale(calc(var(--image-scale, 1) * 1.05));
+}
+
+/* 3. SUBTITLE SMILEY ICON */
+.starter-hero__smiley {
+	display: inline-block;
+	vertical-align: middle;
+	margin-left: 4px;
+	stroke: var(--heart-color);
+	transition: transform 0.3s ease;
+}
+
+.starter-hero__subtitle:hover .starter-hero__smiley {
+	transform: scale(1.1) rotate(5deg);
+}
+
+/* 4. PREMIUM FLOATING HEART ANIMATION */
+@keyframes float-heart {
+	0% {
+		transform: translateY(0) rotate(0deg) scale(1);
+		opacity: 0.8;
+	}
+
+	50% {
+		transform: translateY(-15px) rotate(8deg) scale(1.05);
+		opacity: 0.95;
+	}
+
+	100% {
+		transform: translateY(0) rotate(0deg) scale(1);
+		opacity: 0.8;
+	}
+}
+
+.starter-hero__decor-heart {
+	display: inline-block;
+	animation: float-heart 6s ease-in-out infinite;
+	filter: drop-shadow(0 4px 6px rgba(244, 63, 94, 0.15));
+}
+
+/* 5. TWINKLING SPARKLES ANIMATION */
+@keyframes twinkle {
+
+	0%,
+	100% {
+		opacity: 0.2;
+		transform: scale(0.8) rotate(0deg);
+		filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.4));
+	}
+
+	50% {
+		opacity: 1;
+		transform: scale(1.1) rotate(180deg);
+		filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.9));
+	}
+}
+
+.starter-hero__decor-sparkle {
+	display: inline-block;
+	animation: twinkle 4s ease-in-out infinite;
+}
+
+/* 6. BUTTON BASE STYLES & HOVER EFFECTS */
+.starter-hero__btn-primary {
+	background-color: var(--heart-color, #F43F5E);
+	color: #ffffff;
+	padding: 14px 32px;
+	border-radius: 12px;
+	font-weight: 700;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 10px;
+	box-shadow: 0 4px 12px rgba(244, 63, 94, 0.2);
+	transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+	text-decoration: none;
+}
+
+.starter-hero__btn-primary:hover {
+	background-color: #E11D48;
+	color: #ffffff;
+	transform: translateY(-2px);
+	box-shadow: 0 10px 25px rgba(244, 63, 94, 0.35);
+}
+
+.starter-hero__btn-secondary {
+	background-color: transparent;
+	color: #B91C5C;
+	border: 2px solid #FFF1F2;
+	padding: 14px 32px;
+	border-radius: 12px;
+	font-weight: 700;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+	text-decoration: none;
+}
+
+.starter-hero__btn-secondary:hover {
+	background-color: #FFF1F2;
+	border-color: #B91C5C;
+	color: #B91C5C;
+	transform: translateY(-2px);
+}
+
+/* 7. FOOTER STATS STYLING */
+.starter-hero__stats-list {
+	display: grid;
+	gap: 24px;
+}
+
+.starter-hero__stat-item:not(:last-child) {
+	border-right-color: var(--stat-divider-color, #F3F4F6);
+	border-right-width: var(--stat-divider-width, 1px);
+	border-right-style: var(--stat-divider-style, solid);
+}
+
+.starter-hero__stat-item:last-child {
+	border-right: none !important;
+}
+
+.starter-hero__stat-icon-wrap {
+	flex-shrink: 0;
+	transition: transform 0.3s ease;
+}
+
+.starter-hero__stats-list>div:hover .starter-hero__stat-icon-wrap {
+	transform: scale(1.08) rotate(-5deg);
+}
+
+/* 8. BOTTOM LAYERED WAVE CONTAINER */
+.starter-hero__wave-container {
+	position: absolute;
+	bottom: -1px;
+	left: 0;
+	width: 100%;
+	height: 80px;
+	pointer-events: none;
+}
+
+/* 9. SWIPER STYLE ADJUSTMENTS */
+.starter-hero__swiper {
+	width: 100%;
+	position: relative;
+}
+
+.starter-hero__swiper .swiper-wrapper {
+	padding-bottom: 0;
+}
+
+.swiper-slide {
+	position: relative;
+	overflow: hidden;
+	width: 100%;
+}
+
+.starter-hero__slide-bg {
+	position: absolute;
+	inset: 0;
+	z-index: 0;
+	pointer-events: none;
+}
+
+.starter-hero__slide-overlay {
+	position: absolute;
+	inset: 0;
+	z-index: 1;
+	pointer-events: none;
+}
+
+.swiper-slide>.s-container {
+	position: relative;
+	z-index: 10;
+}
+
+.starter-hero__pagination {
+	position: absolute;
+	bottom: 24px !important;
+	left: 0 !important;
+	width: 100% !important;
+	transform: none !important;
+	z-index: 30;
+	display: flex !important;
+	align-items: center !important;
+	justify-content: center !important;
+	gap: 6px;
+}
+
+/* When the wave swoosh is visible, shift pagination up to avoid overlay */
+.starter-hero--has-wave .starter-hero__pagination {
+	bottom: 96px !important;
+}
+
+.starter-hero__pagination .swiper-pagination-bullet {
+	width: 8px;
+	height: 8px;
+	background-color: rgba(0, 0, 0, 0.15);
+	opacity: 0.5;
+	transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+	cursor: pointer;
+}
+
+.starter-hero__pagination .swiper-pagination-bullet-active {
+	background-color: var(--heart-color, #F43F5E);
+	width: 20px;
+	border-radius: 4px;
+	opacity: 1;
+}
+
+/* Navigation Buttons */
+.starter-hero__button-prev,
+.starter-hero__button-next {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 30;
+	width: 44px;
+	height: 44px;
+	background-color: rgba(255, 255, 255, 0.9);
+	border: 1px solid #e5e7eb;
+	color: #6b7280;
+	border-radius: 50%;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+	cursor: pointer;
+	box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.starter-hero__button-prev:hover,
+.starter-hero__button-next:hover {
+	background-color: var(--heart-color, #F43F5E);
+	border-color: var(--heart-color, #F43F5E);
+	color: #ffffff;
+	transform: translateY(-50%) scale(1.05);
+	box-shadow: 0 10px 15px -3px rgba(244, 63, 94, 0.3), 0 4px 6px -2px rgba(244, 63, 94, 0.05);
+}
+
+.starter-hero__button-prev {
+	left: 16px;
+}
+
+.starter-hero__button-next {
+	right: 16px;
+}
+
+@media (min-width: 1024px) {
+	.starter-hero__button-prev {
+		left: 32px;
+	}
+
+	.starter-hero__button-next {
+		right: 32px;
+	}
+}
+
+/* 10. TYPOGRAPHY BASELINE SIZES */
+.starter-hero__heading {
+	font-size: 2.25rem;
+	/* ~36px */
+	line-height: 1.25;
+	font-weight: 700;
+}
+
+@media (min-width: 768px) {
+	.starter-hero__heading {
+		font-size: 3rem;
+		/* ~48px */
+	}
+}
+
+@media (min-width: 1024px) {
+	.starter-hero__heading {
+		font-size: 3.5rem;
+		/* ~56px */
+	}
+}
+
+/* 11. RESPONSIVE HEIGHT DEFAULTS */
+.starter-hero__slide-row {
+	min-height: 480px;
+	/* Tablet and Mobile default */
+}
+
+@media (min-width: 1024px) {
+	.starter-hero__slide-row {
+		min-height: 580px;
+		/* Desktop default */
+	}
+}
+
+/* 12. SLIDE BADGE TRANSITIONS */
+.starter-hero__badge {
+	transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+.starter-hero__badge-icon {
+	transition: color 0.3s ease;
+}

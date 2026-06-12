@@ -1,0 +1,61 @@
+﻿/* starter-services.js — Swiper initialization and grid lifecycle hooks */
+
+(function($) {
+	const initServicesSlider = function( $scope ) {
+		const swiperEl = $scope.find( '.starter-services__swiper' )[0];
+		if ( ! swiperEl ) return;
+		
+		// Prevent double initialization
+		if ( swiperEl.classList.contains( 'swiper-initialized' ) ) {
+			return;
+		}
+		
+		if ( swiperEl.dataset.swiperConfig ) {
+			try {
+				const config = JSON.parse( swiperEl.dataset.swiperConfig );
+				
+				// Isolate pagination and navigation to the current widget instance
+				const paginationEl = $scope.find( '.starter-services__pagination' )[0];
+				const prevEl = $scope.find( '.starter-services__button-prev' )[0];
+				const nextEl = $scope.find( '.starter-services__button-next' )[0];
+				
+				if ( paginationEl ) {
+					config.pagination = {
+						el: paginationEl,
+						clickable: true
+					};
+				}
+				if ( prevEl && nextEl ) {
+					config.navigation = {
+						prevEl: prevEl,
+						nextEl: nextEl
+					};
+				}
+				
+				// Initialize Swiper
+				if ( typeof Swiper !== 'undefined' ) {
+					new Swiper( swiperEl, config );
+				} else if ( window.elementorFrontend && window.elementorFrontend.utils && window.elementorFrontend.utils.swiper ) {
+					new window.elementorFrontend.utils.swiper( swiperEl, config ).then( function( swiperInstance ) {
+						// Managed async Swiper
+					} );
+				}
+			} catch ( e ) {
+				console.error( 'Invalid Swiper config:', e );
+			}
+		}
+	};
+
+	$( window ).on( 'elementor/frontend/init', function() {
+		elementorFrontend.hooks.addAction( 'frontend/element_ready/starter-services.default', initServicesSlider );
+	} );
+
+	// Fallback for non-Elementor or direct page load
+	$(document).ready(function() {
+		if ( ! window.elementorFrontend ) {
+			$( '.starter-services' ).each( function() {
+				initServicesSlider( $(this) );
+			} );
+		}
+	});
+})(jQuery);

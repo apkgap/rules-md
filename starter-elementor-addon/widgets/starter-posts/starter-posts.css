@@ -1,0 +1,98 @@
+﻿/* starter-posts.css */
+
+.starter-posts {
+	/* Grid and Row spacing custom properties defaults */
+	--starter-posts-col-gap: 30px;
+	--starter-posts-row-gap: 30px;
+}
+
+/* Grid Wrapper layout */
+.starter-posts__wrapper--grid {
+	display: grid;
+	grid-template-columns: repeat(var(--starter-posts-columns-desktop, 3), 1fr);
+	column-gap: var(--starter-posts-col-gap);
+	row-gap: var(--starter-posts-row-gap);
+}
+
+@media (max-width: 1024px) {
+	.starter-posts__wrapper--grid {
+		grid-template-columns: repeat(var(--starter-posts-columns-tablet, 2), 1fr);
+	}
+}
+
+@media (max-width: 767px) {
+	.starter-posts__wrapper--grid {
+		grid-template-columns: repeat(var(--starter-posts-columns-mobile, 1), 1fr);
+	}
+}
+
+/* List Layout (Flex column list) */
+.starter-posts__wrapper--list {
+	display: flex;
+	flex-direction: column;
+	gap: var(--starter-posts-row-gap);
+}
+
+/* Row Layout (Flex column rows) */
+.starter-posts__wrapper--row {
+	display: flex;
+	flex-direction: column;
+	gap: var(--starter-posts-row-gap);
+}
+
+/* Pagination container styling */
+.starter-posts__pagination {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	align-items: center;
+	margin-top: 48px;
+}
+
+/* Base pagination button style */
+.starter-posts__pagination .page-numbers {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	min-width: 44px;
+	height: 44px;
+	padding: 0 16px;
+	font-size: 14px;
+	font-weight: 600;
+	text-decoration: none;
+	border: 1px solid rgba(0, 0, 0, 0.08);
+	background-color: #ffffff;
+	color: var(--base-muted, #7A8B9B);
+	border-radius: 12px;
+	transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+	cursor: pointer;
+}
+
+/* Active and Hover pagination items */
+.starter-posts__pagination .page-numbers.current,
+.starter-posts__pagination .page-numbers:hover:not(.current) {
+	background-color: var(--color-primary, #EC008C);
+	border-color: var(--color-primary, #EC008C);
+	color: #ffffff;
+	box-shadow: 0 10px 15px -3px rgba(236, 0, 140, 0.15);
+	transform: translateY(-2px);
+}
+
+/* Ellipsis pagination dots */
+.starter-posts__pagination .page-numbers.dots {
+	background: transparent;
+	border-color: transparent;
+	cursor: default;
+	pointer-events: none;
+}
+
+/* Empty message styles */
+.starter-posts-empty {
+	text-align: center;
+	padding: 40px;
+	font-size: 16px;
+	color: var(--base-muted, #7A8B9B);
+	background: rgba(0, 0, 0, 0.02);
+	border-radius: 16px;
+	border: 1px dashed rgba(0, 0, 0, 0.1);
+}
