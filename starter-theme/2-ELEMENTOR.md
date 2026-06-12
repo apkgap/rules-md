@@ -15,7 +15,32 @@ Every widget must reside in `widgets/[widget-name]/` and contain exactly 4 files
 - **BEM Naming**: CSS class naming must follow: `.[project-slug]-[widget-name]__[element]--[modifier]`
 
 ## 3. Widget Registration
-All widget classes must be required and registered in the plugin bootstrap file (`[project-slug]-elementor-addon.php`).
+All widget classes must be registered dynamically in the plugin bootstrap file (`[project-slug]-elementor-addon.php`) using a loop to resolve widget filenames and class names dynamically, reducing boilerplate:
+
+```php
+public function register_widgets( $widgets_manager ) {
+    $widgets = [
+        'starter-hero',
+        'starter-services',
+        // Add more widget slugs here...
+    ];
+
+    foreach ( $widgets as $slug ) {
+        $file = STARTER_PATH . "widgets/{$slug}/{$slug}.php";
+        if ( ! file_exists( $file ) ) {
+            continue;
+        }
+        require_once $file;
+        
+        // Dynamic class name resolving (e.g., STARTER_Widget_Starter_Hero)
+        $class = '[PROJECT-PREFIX]_Widget_' . str_replace( ' ', '_', ucwords( str_replace( '-', ' ', $slug ) ) );
+        if ( class_exists( $class ) ) {
+            $widgets_manager->register( new $class() );
+        }
+    }
+}
+```
+
 
 ## 4. Dual-Rendering Synchronization Rule
 When editing layout structure, element selectors, tag hierarchies, or class names inside the PHP `render()` function of a widget, you must apply the exact same modifications to the JavaScript `content_template()` function. This prevents rendering discrepancies between the front-end production template and the backend Elementor editor preview.

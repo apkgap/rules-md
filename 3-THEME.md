@@ -50,3 +50,92 @@ Whitelist and validate keys like `_[project_prefix]_mega_type` and `_[project_pr
     ]
   ]
   ```
+
+## 6. Custom Navigation Menu Fields (Mega Menu)
+To extend navigation menu items with custom meta fields (such as mega menu types and custom icons/images), use the following WordPress hooks:
+- `wp_setup_nav_menu_item`: Loads custom meta data when setup menu items.
+- `wp_nav_menu_item_custom_fields`: Outputs the HTML markup for custom field options in the admin menu editor screen.
+- `wp_update_nav_menu_item`: Sanitizes and saves custom field choices on update.
+
+```php
+// 1. Setup metadata on menu item load
+add_filter( 'wp_setup_nav_menu_item', function ( $menu_item ) {
+    $menu_item->[project_prefix]_mega_type = get_post_meta( $menu_item->ID, '_[project_prefix]_mega_type', true );
+    $menu_item->[project_prefix]_mega_image_id = get_post_meta( $menu_item->ID, '_[project_prefix]_mega_image_id', true );
+    return $menu_item;
+} );
+
+// 2. Render input controls in WordPress admin menu screen
+add_action( 'wp_nav_menu_item_custom_fields', function ( $item_id, $item, $depth, $args ) {
+    $type = get_post_meta( $item_id, '_[project_prefix]_mega_type', true );
+    $image_id = get_post_meta( $item_id, '_[project_prefix]_mega_image_id', true );
+    ?>
+    <p class="field-[project-slug]-mega-type description description-wide">
+        <label for="edit-menu-item-[project-slug]-mega-type-<?php echo esc_attr( $item_id ); ?>">
+            <?php echo esc_html__( 'Mega Menu Type', '[project-slug]' ); ?><br>
+            <select id="edit-menu-item-[project-slug]-mega-type-<?php echo esc_attr( $item_id ); ?>" class="widefat" name="menu-item-[project-slug]-mega-type[<?php echo esc_attr( $item_id ); ?>]">
+                <option value="" <?php selected( $type, '' ); ?>>None</option>
+                <option value="mega-1" <?php selected( $type, 'mega-1' ); ?>>Mega Style 1</option>
+            </select>
+        </label>
+    </p>
+    <?php
+}, 10, 4 );
+
+// 3. Sanitize and save data on menu update
+add_action( 'wp_update_nav_menu_item', function ( $menu_id, $menu_item_db_id, $args ) {
+    if ( isset( $_POST['menu-item-[project-slug]-mega-type'][ $menu_item_db_id ] ) ) {
+        $type = sanitize_text_field( wp_unslash( $_POST['menu-item-[project-slug]-mega-type'][ $menu_item_db_id ] ) );
+        $allowed = [ '', 'mega-1', 'mega-2', 'mega-3' ];
+        $type = in_array( $type, $allowed, true ) ? $type : '';
+        update_post_meta( $menu_item_db_id, '_[project_prefix]_mega_type', $type );
+    }
+}, 10, 3 );
+```
+
+## 7. Responsive Header Position Helper
+When configuring the header layout to be sticky or fixed, use a helper function to convert the options into responsive Tailwind CSS classes rather than writing custom breakpoints:
+
+```php
+function [project_prefix]_get_header_position_class( $header_position, $sticky_disable_on = 'none', $sticky_z_class = 'z-40' ) {
+    $header_position = sanitize_key( (string) $header_position );
+    $sticky_disable_on = sanitize_key( (string) $sticky_disable_on );
+
+    if ( $header_position === 'fixed' ) {
+        return trim( 'fixed top-0 left-0 right-0 ' . $sticky_z_class );
+    }
+
+    if ( $header_position !== 'sticky' ) {
+        return trim( 'relative ' . $sticky_z_class );
+    }
+
+    switch ( $sticky_disable_on ) {
+        case 'none':
+            return trim( 'sticky top-0 ' . $sticky_z_class );
+        case 'mobile':
+            return trim( 'sticky top-0 max-[767px]:static min-[768px]:sticky min-[768px]:top-0 ' . $sticky_z_class );
+        case 'tablet':
+            return trim( 'sticky top-0 max-[767px]:sticky max-[767px]:top-0 min-[768px]:static min-[1025px]:sticky min-[1025px]:top-0 ' . $sticky_z_class );
+        case 'mobile_tablet':
+        default:
+            return trim( 'sticky top-0 max-[1024px]:static min-[1025px]:sticky min-[1025px]:top-0 ' . $sticky_z_class );
+    }
+}
+```
+
+## 8. Polylang String Translation Registrations
+For multilingual support using Polylang, register custom headers and common theme strings inside the `after_setup_theme` action:
+
+```php
+function [project_prefix]_register_polylang_strings() {
+    if ( ! function_exists( 'pll_register_string' ) ) {
+        return;
+    }
+
+    // Register theme-specific strings
+    pll_register_string( '[project-slug]', 'Search Articles', 'Header', false );
+    pll_register_string( '[project-slug]', 'Read More', 'Common', false );
+}
+add_action( 'after_setup_theme', '[project_prefix]_register_polylang_strings' );
+```
+
