@@ -148,12 +148,41 @@ protected function get_taxonomy_terms( string $taxonomy ): array {
 ```
 
 ### 12.2 Constructing and Executing Queries Safely
-Construct `WP_Query` arguments strictly within the controller layer (never inside the presentation files). Pass settings to a dedicated query builder method inside the Widget class:
+Construct `WP_Query` arguments strictly within the controller layer (never inside the presentation files). To support fully dynamic category/taxonomy filtering on custom widgets, loop over all public taxonomies to register Elementor control fields, then parse the settings into a dynamic `tax_query`:
 
 ```php
-/**
- * Build WP_Query argument array from Elementor settings.
- */
+// Inside register_controls():
+$taxonomies = get_taxonomies( [ 'public' => true ], 'objects' );
+if ( ! is_wp_error( $taxonomies ) && is_array( $taxonomies ) ) {
+    foreach ( $taxonomies as $taxonomy ) {
+        $terms = get_terms( [
+            'taxonomy'   => $taxonomy->name,
+            'hide_empty' => false,
+        ] );
+
+        $term_options = [];
+        if ( ! is_wp_error( $terms ) && is_array( $terms ) ) {
+            foreach ( $terms as $term ) {
+                $term_options[ $term->slug ] = $term->name;
+            }
+        }
+
+        if ( ! empty( $term_options ) ) {
+            $this->add_control( 'tax_filter_' . $taxonomy->name, [
+                'label'       => sprintf( esc_html__( 'Filter by %s', '[project-slug]' ), $taxonomy->label ),
+                'type'        => \Elementor\Controls_Manager::SELECT2,
+                'multiple'    => true,
+                'options'     => $term_options,
+                'label_block' => true,
+                'condition'   => [
+                    'post_type' => $taxonomy->object_type,
+                ],
+            ] );
+        }
+    }
+}
+
+// Inside render() or build_widget_query():
 protected function build_widget_query( array $settings ): array {
     $post_type = ! empty( $settings['query_post_type'] ) ? sanitize_key( $settings['query_post_type'] ) : 'post';
     $posts_per_page = ! empty( $settings['posts_per_page'] ) ? intval( $settings['posts_per_page'] ) : 6;
@@ -169,20 +198,29 @@ protected function build_widget_query( array $settings ): array {
         'ignore_sticky_posts' => true,
     ];
 
-    // Conditionally apply Taxonomy / Term Query filters
-    if ( ! empty( $settings['filter_taxonomy'] ) && ! empty( $settings['filter_terms'] ) ) {
-        $taxonomy = sanitize_key( $settings['filter_taxonomy'] );
-        $terms    = array_map( 'sanitize_key', (array) $settings['filter_terms'] );
+    // Build tax_query dynamically based on selected terms
+    $tax_query = [];
+    $taxonomies = get_taxonomies( [ 'public' => true ], 'objects' );
+    if ( ! is_wp_error( $taxonomies ) && is_array( $taxonomies ) ) {
+        foreach ( $taxonomies as $taxonomy ) {
+            $control_key = 'tax_filter_' . $taxonomy->name;
+            if ( ! empty( $settings[ $control_key ] ) && is_array( $settings[ $control_key ] ) ) {
+                $tax_query[] = [
+                    'taxonomy' => $taxonomy->name,
+                    'field'    => 'slug',
+                    'terms'    => array_map( 'sanitize_key', $settings[ $control_key ] ),
+                    'operator' => 'IN',
+                ];
+            }
+        }
+    }
 
-        $args['tax_query'] = [
-            [
-                'taxonomy'         => $taxonomy,
-                'field'            => 'slug',
-                'terms'            => $terms,
-                'operator'         => 'IN',
-                'include_children' => true,
-            ]
-        ];
+    if ( count( $tax_query ) > 1 ) {
+        $tax_query['relation'] = 'AND';
+    }
+
+    if ( ! empty( $tax_query ) ) {
+        $args['tax_query'] = $tax_query;
     }
 
     return $args;
