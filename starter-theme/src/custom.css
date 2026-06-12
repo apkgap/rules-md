@@ -1,0 +1,281 @@
+﻿/* Custom Logo Styling */
+.site-branding {
+    display: flex;
+    align-items: center;
+
+    .custom-logo-link {
+        display: flex;
+        align-items: center;
+        min-width: unset;
+        /* Remove fixed width to let it flow */
+
+        .custom-logo {
+            display: block;
+            width: auto;
+            height: 70px;
+            /* Further increased for better branding visibility */
+            transition: transform 0.3s ease;
+            box-shadow: none !important;
+            max-width: 100%;
+            object-fit: contain;
+
+            &:hover {
+                transform: scale(1.05);
+            }
+
+            @media (max-width: 768px) {
+                height: 56px;
+            }
+        }
+    }
+
+    /* Text fallback scroll state */
+    a span {
+        transition: color 0.3s ease;
+    }
+}
+
+/* Mobile Menu Logo Override */
+#mobile-menu .custom-logo-link {
+    display: flex;
+    align-items: center;
+
+    .custom-logo {
+        height: 40px !important;
+        width: auto !important;
+        object-fit: contain;
+        transform: none !important;
+    }
+}
+
+/* Header Navigation Refinements */
+#site-navigation>ul {
+    height: 100%;
+}
+
+#site-navigation>ul>li {
+    height: 100%;
+    display: flex;
+    align-items: center;
+}
+
+/* body.admin-bar header#masthead {
+    top: 32px;
+} */
+/* Right-side Button Refinements */
+header button {
+    cursor: pointer;
+    -webkit-appearance: none;
+    appearance: none;
+    box-shadow: none !important;
+}
+
+/* Job Application Modal Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+    width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background: #cbd5e1;
+    border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background: #94a3b8;
+}
+
+/* ==========================================================================
+   Fluent Forms Custom Premium Styling
+   ========================================================================== */
+.fluentform {
+    /* Theme color config */
+    --ff-primary: #EA4F89;
+    --ff-primary-hover: #C40072;
+    --ff-text-dark: #18181B;
+    --ff-text-muted: #71717A;
+    --ff-border: #E5E7EB;
+    --ff-border-focus: #EA4F89;
+    --ff-bg-input: #FFFFFF;
+
+    font-family: inherit;
+
+    .ff-el-group {
+        margin-bottom: 1.5rem;
+        display: flex;
+        flex-direction: column;
+    }
+
+    /* Column layout for First Name / Last Name */
+    .ff-t-container {
+        display: flex;
+        gap: 1rem;
+        width: 100%;
+
+        @media (max-width: 640px) {
+            flex-direction: column;
+            gap: 1.25rem;
+        }
+    }
+
+    .ff-t-cell {
+        flex: 1;
+        width: 100%;
+
+        .ff-el-group {
+            margin-bottom: 0;
+            /* Clear spacing inside grid cells */
+        }
+    }
+
+    /* Labels */
+    .ff-el-input--label {
+        margin-bottom: 0.5rem;
+
+        label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--ff-text-dark);
+            letter-spacing: 0.01em;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        &.ff-el-is-required label::after,
+        &.asterisk-right label::after {
+            content: "*";
+            color: #EF4444;
+            margin-left: 0.25rem;
+            font-weight: bold;
+        }
+    }
+
+    /* Input & Textarea fields */
+    .ff-el-form-control {
+        width: 100%;
+        background-color: var(--ff-bg-input);
+        border: 1.5px solid var(--ff-border);
+        border-radius: 12px !important;
+        /* Premium rounded corners */
+        padding: 0.75rem 1rem;
+        font-size: 0.95rem;
+        color: var(--ff-text-dark);
+        outline: none;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.02);
+        transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+        -webkit-appearance: none;
+        appearance: none;
+
+        &::placeholder {
+            color: var(--ff-text-muted);
+            opacity: 0.7;
+        }
+
+        &:hover {
+            border-color: #CBD5E1;
+        }
+
+        &:focus {
+            border-color: var(--ff-border-focus);
+            background-color: #FFFFFF;
+            box-shadow: 0 0 0 4px rgba(234, 79, 137, 0.12);
+            transform: translateY(-1px);
+        }
+    }
+
+    /* Special styling for textarea */
+    textarea.ff-el-form-control {
+        min-height: 120px;
+        resize: vertical;
+        line-height: 1.6;
+    }
+
+    /* Submit Button Wrapper & Rounded full constraint */
+    .ff_submit_btn_wrapper {
+        margin-top: 1.75rem;
+
+        .ff-btn-submit {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--ff-primary) !important;
+            color: #FFFFFF !important;
+            font-weight: 600;
+            font-size: 0.95rem;
+            letter-spacing: 0.02em;
+            padding: 0.875rem 2.25rem !important;
+            border-radius: 9999px !important;
+            /* Forced 100% round shape constraint */
+            border: none !important;
+            cursor: pointer;
+            box-shadow: 0 4px 14px rgba(234, 79, 137, 0.3);
+            transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1) !important;
+            transform: translateY(0);
+            width: auto;
+            max-width: 150px;
+            margin: 0 auto;
+
+            &:hover {
+                background-color: var(--ff-primary-hover) !important;
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(234, 79, 137, 0.45);
+            }
+
+            &:active {
+                transform: translateY(0) scale(0.98);
+                box-shadow: 0 4px 10px rgba(234, 79, 137, 0.2);
+            }
+        }
+    }
+
+    /* Validation & Error styling */
+    .ff-el-is-error {
+        .ff-el-form-control {
+            border-color: #EF4444 !important;
+
+            &:focus {
+                box-shadow: 0 0 0 4px rgba(239, 68, 68, 0.15) !important;
+            }
+        }
+    }
+
+    .ff-error,
+    .error {
+        color: #EF4444 !important;
+        font-size: 0.8rem;
+        font-weight: 500;
+        margin-top: 0.375rem;
+        display: block;
+        animation: ff-slideIn 0.2s ease-out;
+    }
+}
+
+/* Success message alert style */
+.fluentform_wrapper_1 .ff-message-success,
+.fluentform-widget-wrapper .fluentform-success-alert {
+    background-color: #F7FEE7 !important;
+    border: 1.5px solid #84CC16 !important;
+    color: #365314 !important;
+    border-radius: 16px !important;
+    padding: 1.25rem 1.5rem !important;
+    margin-bottom: 1.5rem;
+    font-size: 0.95rem;
+    font-weight: 500;
+    box-shadow: 0 4px 12px rgba(132, 204, 22, 0.05);
+}
+
+@keyframes ff-slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

@@ -1,0 +1,20 @@
+﻿@utility container {
+  margin-inline: auto;
+  width: 100%;
+  padding-inline: 1.5rem;
+
+  @media (min-width: 768px) {
+    max-width: var(--breakpoint-md);
+  }
+  @media (min-width: 992px) {
+    max-width: var(--breakpoint-lg);
+  }
+  @media (min-width: 1200px) {
+    max-width: var(--breakpoint-xl);
+  }
+  @media (min-width: 1640px) {
+    max-width: var(--breakpoint-2xl);
+    padding-inline: 2rem;
+  }
+}
+

@@ -1,0 +1,514 @@
+﻿@theme {
+    --font-sans: "Noto Sans Thai", "Roboto", sans-serif;
+    --font-display: "Noto Sans Thai", "Roboto", sans-serif;
+    --font-sriracha: "Sriracha", cursive;
+
+    --breakpoint-sm: 640px;
+    --breakpoint-md: 768px;
+    --breakpoint-lg: 992px;
+    --breakpoint-xl: 1200px;
+    --breakpoint-2xl: 1640px;
+
+    /* Custom Spacing (Container Padding) */
+    --spacing-container-px: 1.5rem;
+
+    /* Semantic Colors for Light/Dark Mode */
+    --color-primary: var(--color-starter-surface-primary);
+    --color-secondary: var(--color-starter-surface-second);
+    --color-bg-base: var(--color-starter-surface);
+    --color-text-base: var(--color-starter-text-black);
+    --color-text-muted: var(--color-starter-text-subdued);
+    --color-border-base: var(--color-starter-surface-subdued);
+    --color-surface-base: var(--surface-base);
+
+    /* Adjacent Shades (Zinc/Grays) for UI elements, borders, muted text */
+    --color-surface-50: #fafafa;
+    --color-surface-100: #f4f4f5;
+    --color-surface-200: #e4e4e7;
+    --color-surface-300: #d4d4d8;
+    --color-surface-400: #a1a1aa;
+    --color-surface-500: #71717a;
+    --color-surface-600: #52525b;
+    --color-surface-700: #3f3f46;
+    --color-surface-800: #27272a;
+    --color-surface-900: #18181b;
+
+    /* ============================================================
+     Starter Design System — Color Tokens
+     Extracted from design reference (Surface / Text / Icon / Border / Button)
+     Usage: bg-starter-primary  text-starter-second  border-starter-third etc.
+     ============================================================ */
+
+    /* — Surface (Card, Modal, BG) — */
+    --color-starter-surface: #ffffff;
+    --color-starter-surface-subdued: #FAFAFA;
+    --color-starter-surface-primary: #d8b4b6;
+    --color-starter-surface-primary-subdued: #FDE3F1;
+    --color-starter-surface-primary-dark: #d8b4b6;
+    --color-starter-surface-second: #8E2BAF;
+    --color-starter-surface-second-subdued: #F3E5F7;
+    --color-starter-surface-third: #F062B7;
+    --color-starter-surface-third-subdued: #FCE7F3;
+    --color-starter-surface-success: #84CC16;
+    --color-starter-surface-success-subdued: #F7FEE7;
+    --color-starter-surface-warning: #FACC15;
+    --color-starter-surface-warning-subdued: #FEFCE8;
+    --color-starter-surface-critical: #EF4444;
+    --color-starter-surface-critical-subdued: #FEF2F2;
+
+    /* — Text (Heading, Body) — */
+    --color-starter-text-black: #18181B;
+    --color-starter-text-white: #ffffff;
+    --color-starter-text-subdued: #71717A;
+    --color-starter-text-disabled: #A1A1AA;
+    --color-starter-text-primary: #d8b4b6;
+    --color-starter-text-second: #8E2BAF;
+    --color-starter-text-third: #F062B7;
+    --color-starter-text-success: #84CC16;
+    --color-starter-text-warning: #FACC15;
+    --color-starter-text-critical: #EF4444;
+
+    /* — Icon — */
+    --color-starter-icon-black: #1a1a1a;
+    --color-starter-icon-white: #ffffff;
+    --color-starter-icon-subdued: #6b7280;
+    --color-starter-icon-disabled: #9ca3af;
+    --color-starter-icon-primary: #d8b4b6;
+    --color-starter-icon-second: #8E2BAF;
+    --color-starter-icon-third: #F062B7;
+    --color-starter-icon-success: #80c418;
+    --color-starter-icon-warning: #eab800;
+    --color-starter-icon-critical: #e03030;
+
+    /* — Border (Card, Field, Line) — */
+    --color-starter-border-default: #D4D4D8;
+    --color-starter-border-primary: #d8b4b6;
+    --color-starter-border-second: #8E2BAF;
+    --color-starter-border-third: #F062B7;
+    --color-starter-border-success: #84CC16;
+    --color-starter-border-warning: #FACC15;
+    --color-starter-border-critical: #EF4444;
+
+    /* — Button (Action: Button, Checkbox, Radio) — */
+    --color-starter-btn-primary: #d8b4b6;
+    --color-starter-btn-primary-hover: #C40072;
+    --color-starter-btn-primary-pressed: #A3005E;
+    --color-starter-btn-primary-disabled: #e5e7eb;
+    --color-starter-btn-secondary: #ffffff;
+    --color-starter-btn-secondary-disabled: #f3f4f6;
+    --color-starter-btn-secondary-hover-blue: #8E2BAF;
+    --color-starter-btn-secondary-pressed-blue: #C40072;
+    --color-starter-btn-secondary-hover-white: #ffffff;
+    --color-starter-btn-secondary-pressed-white: #f9fafb;
+    --color-starter-btn-tertiary: #8E2BAF;
+    --color-starter-btn-tertiary-hover: #6F228A;
+    --color-starter-btn-tertiary-pressed: #6F228A;
+    --color-starter-btn-tertiary-disabled: #F4F4F5;
+    --color-starter-btn-ghost-default: #FFFFFF;
+    --color-starter-btn-ghost-hover: #FDE3F1;
+    --color-starter-btn-ghost-pressed: #FDE3F1;
+    --color-starter-btn-ghost-disabled: #FFFFFF;
+}
+
+@theme {
+    /* ─── Display ─────────────────────────────── */
+    --text-display-96: 96px;
+    --text-display-96--line-height: 104px;
+    --text-display-96--font-weight: 700;
+    --text-display-96--letter-spacing: 0;
+
+    --text-display-64: 64px;
+    --text-display-64--line-height: 72px;
+    --text-display-64--font-weight: 700;
+    --text-display-64--letter-spacing: 0;
+
+    --text-display-40: 40px;
+    --text-display-40--line-height: 48px;
+    --text-display-40--font-weight: 700;
+    --text-display-40--letter-spacing: 0;
+
+    /* ─── Title Subsection ─────────────────────── */
+    --text-title-subsection-32: 32px;
+    --text-title-subsection-32--line-height: 40px;
+    --text-title-subsection-32--font-weight: 700;
+    --text-title-subsection-32--letter-spacing: 0;
+
+    --text-title-subsection-28: 28px;
+    --text-title-subsection-28--line-height: 36px;
+    --text-title-subsection-28--font-weight: 700;
+    --text-title-subsection-28--letter-spacing: 0;
+
+    --text-title-subsection-24: 24px;
+    --text-title-subsection-24--line-height: 32px;
+    --text-title-subsection-24--font-weight: 600;
+    --text-title-subsection-24--letter-spacing: 0;
+
+    /* ─── Title Body ───────────────────────────── */
+    --text-title-body-20: 20px;
+    --text-title-body-20--line-height: 28px;
+    --text-title-body-20--font-weight: 600;
+    --text-title-body-20--letter-spacing: 0;
+
+    --text-title-body-16: 16px;
+    --text-title-body-16--line-height: 24px;
+    --text-title-body-16--font-weight: 600;
+    --text-title-body-16--letter-spacing: 0;
+
+    /* ─── Body ─────────────────────────────────── */
+    --text-body-20: 20px;
+    --text-body-20--line-height: 32px;
+    --text-body-20--font-weight: 400;
+    --text-body-20--letter-spacing: 0;
+
+    --text-body-16: 16px;
+    --text-body-16--line-height: 28px;
+    --text-body-16--font-weight: 400;
+    --text-body-16--letter-spacing: 0;
+
+    --text-body-14: 14px;
+    --text-body-14--line-height: 24px;
+    --text-body-14--font-weight: 400;
+    --text-body-14--letter-spacing: 0;
+
+    /* ─── Caption ──────────────────────────────── */
+    --text-caption-12: 12px;
+    --text-caption-12--line-height: 20px;
+    --text-caption-12--font-weight: 400;
+    --text-caption-12--letter-spacing: 0;
+
+    /* ─── Menu ─────────────────────────────────── */
+    --text-menu-16: 16px;
+    --text-menu-16--line-height: 24px;
+    --text-menu-16--font-weight: 500;
+    --text-menu-16--letter-spacing: 0;
+
+    --text-menu-14: 14px;
+    --text-menu-14--line-height: 22px;
+    --text-menu-14--font-weight: 500;
+    --text-menu-14--letter-spacing: 0;
+
+    /* ─── Link ─────────────────────────────────── */
+    --text-link-16: 16px;
+    --text-link-16--line-height: 28px;
+    --text-link-16--font-weight: 400;
+    --text-link-16--letter-spacing: 0;
+
+    --text-link-14: 14px;
+    --text-link-14--line-height: 24px;
+    --text-link-14--font-weight: 400;
+    --text-link-14--letter-spacing: 0;
+
+    /* ─── Button ───────────────────────────────── */
+    --text-button-large: 16px;
+    --text-button-large--line-height: 24px;
+    --text-button-large--font-weight: 600;
+    --text-button-large--letter-spacing: 0;
+
+    --text-button-medium: 14px;
+    --text-button-medium--line-height: 20px;
+    --text-button-medium--font-weight: 600;
+    --text-button-medium--letter-spacing: 0;
+
+    /* ─── Tailwind Text Scale ───────────────────── */
+    --text-xs: 14px;
+    --text-xs--line-height: 20px;
+    --text-xs--font-weight: 400;
+    --text-xs--letter-spacing: 0;
+
+    --text-sm: 16px;
+    --text-sm--line-height: 24px;
+    --text-sm--font-weight: 400;
+    --text-sm--letter-spacing: 0;
+
+    --text-base: 18px;
+    --text-base--line-height: 26px;
+    --text-base--font-weight: 400;
+    --text-base--letter-spacing: 0;
+
+    --text-lg: 20px;
+    --text-lg--line-height: 28px;
+    --text-lg--font-weight: 400;
+    --text-lg--letter-spacing: 0;
+
+    --text-xl: 24px;
+    --text-xl--line-height: 32px;
+    --text-xl--font-weight: 600;
+    --text-xl--letter-spacing: 0;
+
+    --text-2xl: 28px;
+    --text-2xl--line-height: 36px;
+    --text-2xl--font-weight: 600;
+    --text-2xl--letter-spacing: 0;
+
+    --text-3xl: 34px;
+    --text-3xl--line-height: 42px;
+    --text-3xl--font-weight: 700;
+    --text-3xl--letter-spacing: 0;
+
+    --text-4xl: 40px;
+    --text-4xl--line-height: 48px;
+    --text-4xl--font-weight: 700;
+    --text-4xl--letter-spacing: 0;
+
+    --text-5xl: 48px;
+    --text-5xl--line-height: 56px;
+    --text-5xl--font-weight: 700;
+    --text-5xl--letter-spacing: 0;
+
+    --text-6xl: 58px;
+    --text-6xl--line-height: 68px;
+    --text-6xl--font-weight: 700;
+    --text-6xl--letter-spacing: 0;
+
+    --text-7xl: 70px;
+    --text-7xl--line-height: 80px;
+    --text-7xl--font-weight: 700;
+    --text-7xl--letter-spacing: 0;
+
+    --text-8xl: 84px;
+    --text-8xl--line-height: 96px;
+    --text-8xl--font-weight: 700;
+    --text-8xl--letter-spacing: 0;
+
+    --text-9xl: 100px;
+    --text-9xl--line-height: 112px;
+    --text-9xl--font-weight: 700;
+    --text-9xl--letter-spacing: 0;
+}
+
+/* Light Mode Defaults */
+:root {
+    --bg-base: #ffffff;
+    --text-base: #18181b;
+    --text-muted: #71717a;
+    --border-base: #e4e4e7;
+    --surface-base: #f4f4f5;
+}
+
+/* Dark Mode Overrides */
+.dark {
+    --bg-base: #000000;
+    --text-base: #fafafa;
+    --text-muted: #a1a1aa;
+    --border-base: #27272a;
+    --surface-base: #09090b;
+}
+
+html,
+body {
+    @apply bg-bg-base text-base;
+}
+
+/* Logo Theme Awareness - Assuming original logo is black/dark */
+/* .custom-logo {
+    @apply transition-all duration-500;
+    filter: invert(1) brightness(100%);
+}
+.dark .custom-logo {
+    filter: none;
+} */
+
+@layer components {
+    .starter-theme-container {
+        @apply container mx-auto;
+    }
+
+    .p-container {
+        @apply container mx-auto py-[2em] md:py-[3em] lg:py-[5em] px-[1.5em] md:px-[2em] lg:px-0;
+    }
+}
+
+/* =============================================
+   Starter THEME WIDGET AREA — Premium Sidebar Styling
+   BEM: .starter-theme-widget-area > section.widget
+   Supports Light & Dark mode via CSS Variables
+   ============================================= */
+
+.starter-theme-widget-area {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+}
+
+/* --- Base Widget Card --- */
+.starter-theme-widget-area .widget {
+    background: var(--surface-base);
+    border: 1px solid var(--border-base);
+    border-radius: 1.5rem;
+    padding: 1.5rem 1.75rem;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.starter-theme-widget-area .widget:hover {
+    border-color: color-mix(in srgb, var(--primary) 20%, transparent);
+    box-shadow: 0 4px 24px color-mix(in srgb, var(--primary) 6%, transparent);
+}
+
+/* --- Widget Title --- */
+.starter-theme-widget-area .widget-title,
+.starter-theme-widget-area .wp-block-heading {
+    font-family: var(--font-display, sans-serif);
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border-base);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.starter-theme-widget-area .wp-block-heading::before {
+    content: '';
+    display: inline-block;
+    width: 1.5rem;
+    height: 2px;
+    background: var(--primary);
+    border-radius: 9999px;
+    opacity: 0.4;
+    flex-shrink: 0;
+}
+
+/* --- Search Widget --- */
+.starter-theme-widget-area .wp-block-search {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.starter-theme-widget-area .wp-block-search__label {
+    font-family: var(--font-display, sans-serif);
+    font-size: 16px;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--text-muted);
+    margin-bottom: 0.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border-base);
+}
+
+.starter-theme-widget-area .wp-block-search__inside-wrapper {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    flex-direction: column;
+}
+
+.starter-theme-widget-area .wp-block-search__input {
+    flex: 1;
+    background: var(--bg-base);
+    border: 1.5px solid var(--border-base);
+    border-radius: 0.75rem;
+    padding: 0.6rem 1rem;
+    font-size: 0.8rem;
+    color: var(--text-base);
+    outline: none;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    font-family: var(--font-sans, sans-serif);
+}
+
+.starter-theme-widget-area .wp-block-search__input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px color-mix(in srgb, var(--primary) 12%, transparent);
+}
+
+.starter-theme-widget-area .wp-block-search__button {
+    background: var(--primary);
+    color: var(--secondary);
+    border: none;
+    border-radius: 0.75rem;
+    padding: 1rem 1rem;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    cursor: pointer;
+    transition: opacity 0.2s ease, transform 0.15s ease;
+    font-family: var(--font-sans, sans-serif);
+    white-space: nowrap;
+    width: 100%;
+}
+
+.starter-theme-widget-area .wp-block-search__button:hover {
+    opacity: 0.85;
+    transform: translateY(-1px);
+}
+
+/* --- Recent Posts List --- */
+.starter-theme-widget-area .wp-block-latest-posts,
+.starter-theme-widget-area .wp-block-archives-list,
+.starter-theme-widget-area .wp-block-categories-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+}
+
+.starter-theme-widget-area .wp-block-latest-posts li,
+.starter-theme-widget-area .wp-block-archives-list li,
+.starter-theme-widget-area .wp-block-categories-list li {
+    border-bottom: 1px solid var(--border-base);
+}
+
+.starter-theme-widget-area .wp-block-latest-posts li:last-child,
+.starter-theme-widget-area .wp-block-archives-list li:last-child,
+.starter-theme-widget-area .wp-block-categories-list li:last-child {
+    border-bottom: none;
+}
+
+.starter-theme-widget-area .wp-block-latest-posts__post-title,
+.starter-theme-widget-area .wp-block-archives-list a,
+.starter-theme-widget-area .wp-block-categories-list a {
+    display: block;
+    padding: 0.65rem 0.25rem;
+    font-size: 0.8rem;
+    font-weight: 500;
+    color: var(--text-base);
+    text-decoration: none;
+    transition: color 0.2s ease, padding-left 0.2s ease;
+    line-height: 1.5;
+    font-family: var(--font-sans, sans-serif);
+}
+
+.starter-theme-widget-area .wp-block-latest-posts__post-title:hover,
+.starter-theme-widget-area .wp-block-archives-list a:hover,
+.starter-theme-widget-area .wp-block-categories-list a:hover {
+    color: var(--primary);
+    padding-left: 0.5rem;
+}
+
+/* --- No Comments / Empty State --- */
+.starter-theme-widget-area .no-comments {
+    font-size: 0.78rem;
+    color: var(--text-muted);
+    font-style: italic;
+    padding: 0.25rem 0;
+    font-family: var(--font-sans, sans-serif);
+}
+
+/* --- Remove default WP group padding/margin --- */
+.starter-theme-widget-area .wp-block-group {
+    margin: 0 !important;
+}
+
+.starter-theme-widget-area .wp-block-group__inner-container {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.starter-theme-widget-area .widget img {
+    width: 100%;
+}
+
+.starter-theme-community-footer ul li a,
+.starter-theme-community-footer ul li i {
+    color: #fff;
+}

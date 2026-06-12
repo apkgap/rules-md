@@ -1,0 +1,251 @@
+﻿/* Hide elements with x-cloak until Alpine.js has initialised — prevents FOUC (flash of unstyled content) */
+[x-cloak] { display: none !important; }
+
+/* Base Styles for HTML Elements */
+@layer base {
+  html, body {
+    font-family: var(--font-sans) !important;
+  }
+
+  /* Typography */
+  h1, h2, h3, h4, h5, h6,
+  .elementor-heading-title,
+  .elementor-brand-text,
+  .elementor-button,
+  .elementor-text-editor {
+    font-family: var(--font-display) !important;
+    font-weight: 700;
+  }
+
+  h1 {
+    @apply text-3xl lg:text-4xl font-bold font-display mb-5 mt-8 leading-tight;
+  }
+  h2 {
+    @apply text-3xl lg:text-4xl font-bold font-display mb-5 mt-8 leading-tight;
+  }
+  h3 {
+    @apply text-2xl lg:text-3xl font-bold font-display mb-4 mt-6 leading-snug;
+  }
+  h4 {
+    @apply text-base lg:text-2xl font-bold font-display mb-3 mt-6 leading-snug;
+  }
+  h5 {
+    @apply text-lg lg:text-base font-bold font-display mb-3 mt-4;
+  }
+  h6 {
+    @apply text-base lg:text-lg font-bold font-display mb-3 mt-4;
+  }
+  a {
+    @apply no-underline text-inherit hover:text-inherit transition-colors;
+  }
+  p {
+    @apply font-sans;
+  }
+  strong, b {
+    @apply font-bold text-gray-900;
+  }
+  small {
+    @apply text-sm text-gray-600;
+  }
+  mark {
+    @apply bg-yellow-200 text-gray-900 px-1 rounded-sm;
+  }
+  sub, sup {
+    @apply text-[75%] leading-none relative;
+  }
+  sub {
+    @apply -bottom-[0.25em];
+  }
+  sup {
+    @apply -top-[0.5em];
+  }
+  del, s, strike {
+    @apply line-through text-gray-500;
+  }
+  ins {
+    @apply no-underline bg-green-100 text-green-800 px-1 rounded-sm;
+  }
+  abbr[title] {
+    @apply border-b border-dotted border-gray-500 cursor-help decoration-0;
+  }
+  blockquote {
+    @apply border-l-4 lg:border-l-8 border-gray-300 pl-4 lg:pl-6 py-2 italic my-6 lg:my-8 text-gray-700 bg-gray-50 rounded-r text-lg lg:text-base;
+  }
+  cite {
+    @apply not-italic text-sm lg:text-base text-gray-500 block mt-2 font-medium;
+  }
+  pre {
+    @apply bg-gray-900 text-gray-100 p-4 lg:p-6 rounded-lg overflow-x-auto mb-6 text-sm lg:text-base font-mono leading-normal;
+  }
+  code {
+    @apply font-mono text-sm lg:text-base bg-gray-100 text-pink-600 px-1.5 py-0.5 rounded border border-gray-200;
+  }
+  kbd {
+    @apply font-mono text-xs lg:text-sm bg-gray-100 border border-gray-300 rounded px-1.5 py-0.5 text-gray-800 shadow-sm font-semibold;
+  }
+  hr {
+    @apply my-8 lg:my-12 border-gray-200 border-t;
+  }
+
+  /* Lists */
+  ul {
+    @apply list-disc pl-6 lg:pl-10 mb-4 marker:text-gray-400;
+  }
+  ol {
+    @apply list-decimal pl-6 lg:pl-10 mb-4 marker:text-gray-500;
+  }
+  li {
+    @apply mb-1 pl-1 text-xs;
+  }
+  dl {
+    @apply mb-4 lg:mb-6;
+  }
+  dt {
+    @apply font-bold text-gray-900 mt-4 lg:text-lg;
+  }
+  dd {
+    @apply mb-2 ml-4 lg:ml-6 text-gray-700 lg:text-lg;
+  }
+
+  /* Tables */
+  table {
+    @apply w-full mb-6 border-collapse border border-gray-200 text-left text-sm lg:text-base text-gray-700;
+  }
+  thead {
+    @apply bg-gray-100 text-gray-900;
+  }
+  th {
+    @apply font-semibold border border-gray-300 px-4 py-2 lg:px-6 lg:py-3;
+  }
+  td {
+    @apply border border-gray-300 px-4 py-2 lg:px-6 lg:py-3;
+  }
+  tr:nth-child(even) {
+    @apply bg-gray-50;
+  }
+  caption {
+    @apply text-sm lg:text-base text-gray-500 mb-2 font-medium caption-bottom py-2;
+  }
+
+  /* Forms */
+  fieldset {
+    @apply border border-gray-200 p-5 lg:p-8 rounded-lg mb-6 bg-white shadow-sm;
+  }
+  legend {
+    @apply px-2 font-bold text-gray-900 text-lg lg:text-base;
+  }
+  label {
+    @apply block font-medium mb-1.5 text-gray-700 text-sm lg:text-base;
+  }
+  input[type="text"],
+  input[type="email"],
+  input[type="url"],
+  input[type="password"],
+  input[type="search"],
+  input[type="tel"],
+  input[type="number"],
+  input[type="date"],
+  input[type="month"],
+  input[type="week"],
+  input[type="time"],
+  input[type="datetime-local"],
+  select,
+  textarea {
+    @apply border border-gray-300 rounded-md px-3 py-2 lg:px-4 lg:py-2.5 w-full text-gray-900 shadow-sm placeholder:text-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition duration-150 ease-in-out bg-white text-base lg:text-lg;
+  }
+  textarea {
+    @apply min-h-[120px] lg:min-h-[160px];
+  }
+  input[type="color"] {
+    @apply h-10 w-14 lg:h-12 lg:w-20 p-1 rounded border border-gray-300 cursor-pointer;
+  }
+  input[type="file"] {
+    @apply block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 lg:file:py-2.5 lg:file:px-6 file:rounded-md file:border-0 file:text-sm lg:file:text-base file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100 cursor-pointer border border-gray-300 rounded-md; 
+  }
+  input[type="checkbox"] {
+    @apply rounded border-gray-300 text-blue-600 shadow-sm focus:ring-blue-500 h-4 w-4 lg:h-5 lg:w-5 mr-2 cursor-pointer;
+  }
+  input[type="radio"] {
+    @apply border-gray-300 text-blue-600 shadow-sm focus:ring-blue-500 h-4 w-4 lg:h-5 lg:w-5 mr-2 cursor-pointer;
+  }
+  
+  /* Buttons Reset */
+  button, 
+  input[type="button"], 
+  input[type="submit"], 
+  input[type="reset"] {
+    @apply bg-transparent text-inherit font-medium cursor-pointer transition focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed p-0;
+  }
+
+
+  /* Media */
+  img {
+    @apply max-w-full h-auto;
+  }
+  figure {
+    @apply mb-6 lg:mb-10;
+  }
+  figcaption {
+    @apply text-sm lg:text-base text-gray-500 text-center mt-2 italic;
+  }
+  
+  /* Interactive */
+  details {
+    @apply border border-gray-200 rounded-lg mb-4 bg-white overflow-hidden;
+  }
+  summary {
+    @apply cursor-pointer p-4 lg:p-6 font-medium bg-gray-50 hover:bg-gray-100 transition-colors list-none flex items-center justify-between text-base lg:text-lg;
+  }
+  
+  /* Custom Validation States */
+  .is-error {
+    @apply border-red-500 focus:border-red-500 focus:ring-red-200;
+  }
+  .is-valid {
+    @apply border-green-500 focus:border-green-500 focus:ring-green-200;
+  }
+  label.error {
+    @apply text-red-600 text-xs lg:text-sm mt-1;
+  }
+  /* Additional HTML5 Elements */
+  address {
+    @apply not-italic mb-4 mt-4 text-gray-700 lg:text-lg;
+  }
+  q {
+    @apply italic text-gray-700 lg:text-lg;
+  }
+  samp {
+    @apply font-mono text-sm lg:text-base font-semibold;
+  }
+  time {
+    @apply text-sm lg:text-base text-gray-500 font-medium font-mono;
+  }
+  
+  /* Advanced Media & Objects */
+  audio, canvas, video {
+    @apply inline-block align-baseline max-w-full;
+  }
+  svg {
+    @apply inline-block fill-current align-middle;
+    overflow: hidden; /* Fix for IE */
+  }
+  iframe, object, embed {
+    @apply block border-0 max-w-full rounded-lg shadow-sm w-full aspect-video;
+  }
+  
+  /* Progress & Meters */
+  progress {
+    @apply inline-block align-baseline w-full h-2 lg:h-3 bg-gray-200 rounded overflow-hidden;
+  }
+  meter {
+    @apply inline-block align-baseline w-full h-4 lg:h-5 bg-gray-200 rounded overflow-hidden;
+  }
+  
+  /* Interactive */
+  dialog {
+    @apply p-6 lg:p-10 bg-white rounded-lg shadow-xl backdrop:bg-gray-900/50 border border-gray-200 max-w-lg lg:max-w-2xl w-full m-auto;
+  }
+  dialog::backdrop {
+    @apply bg-black/50 backdrop-blur-sm;
+  }
+}

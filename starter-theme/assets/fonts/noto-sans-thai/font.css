@@ -1,0 +1,336 @@
+﻿/**
+ * Starter Theme Fonts
+ * Consolidated font stylesheet
+ */
+
+/* Noto Sans Thai */
+@font-face {
+    font-family: 'Noto Sans Thai';
+    src: local('Noto Sans Thai Thin'), local('NotoSansThai-Thin'),
+        url('NotoSansThai-Thin.woff2') format('woff2');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans Thai';
+    src: local('Noto Sans Thai ExtraLight'), local('NotoSansThai-ExtraLight'),
+        url('NotoSansThai-ExtraLight.woff2') format('woff2');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans Thai';
+    src: local('Noto Sans Thai Light'), local('NotoSansThai-Light'),
+        url('NotoSansThai-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans Thai';
+    src: local('Noto Sans Thai Regular'), local('NotoSansThai-Regular'),
+        url('NotoSansThai-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans Thai';
+    src: local('Noto Sans Thai Medium'), local('NotoSansThai-Medium'),
+        url('NotoSansThai-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans Thai';
+    src: local('Noto Sans Thai SemiBold'), local('NotoSansThai-SemiBold'),
+        url('NotoSansThai-SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans Thai';
+    src: local('Noto Sans Thai Bold'), local('NotoSansThai-Bold'),
+        url('NotoSansThai-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans Thai';
+    src: local('Noto Sans Thai ExtraBold'), local('NotoSansThai-ExtraBold'),
+        url('NotoSansThai-ExtraBold.woff2') format('woff2');
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans Thai';
+    src: local('Noto Sans Thai Black'), local('NotoSansThai-Black'),
+        url('NotoSansThai-Black.woff2') format('woff2');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+/*
+/*
+/* Noto Sans Thai Condensed */
+/*
+@font-face {
+    font-family: 'Noto Sans Thai Condensed';
+    src: local('Noto Sans Thai Condensed Thin'), local('NotoSansThaiCondensed-Thin'),
+        url('NotoSansThaiCondensed-Thin.woff2') format('woff2');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans Thai Condensed';
+    src: local('Noto Sans Thai Condensed ExtraLight'), local('NotoSansThaiCondensed-ExtraLight'),
+        url('NotoSansThaiCondensed-ExtraLight.woff2') format('woff2');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans Thai Condensed';
+    src: local('Noto Sans Thai Condensed Light'), local('NotoSansThaiCondensed-Light'),
+        url('NotoSansThaiCondensed-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans Thai Condensed';
+    src: local('Noto Sans Thai Condensed Regular'), local('NotoSansThaiCondensed-Regular'),
+        url('NotoSansThaiCondensed-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans Thai Condensed';
+    src: local('Noto Sans Thai Condensed Medium'), local('NotoSansThaiCondensed-Medium'),
+        url('NotoSansThaiCondensed-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans Thai Condensed';
+    src: local('Noto Sans Thai Condensed SemiBold'), local('NotoSansThaiCondensed-SemiBold'),
+        url('NotoSansThaiCondensed-SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans Thai Condensed';
+    src: local('Noto Sans Thai Condensed Bold'), local('NotoSansThaiCondensed-Bold'),
+        url('NotoSansThaiCondensed-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans Thai Condensed';
+    src: local('Noto Sans Thai Condensed ExtraBold'), local('NotoSansThaiCondensed-ExtraBold'),
+        url('NotoSansThaiCondensed-ExtraBold.woff2') format('woff2');
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans Thai Condensed';
+    src: local('Noto Sans Thai Condensed Black'), local('NotoSansThaiCondensed-Black'),
+        url('NotoSansThaiCondensed-Black.woff2') format('woff2');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Noto Sans Thai SemiCondensed */
+@font-face {
+    font-family: 'Noto Sans Thai SemiCondensed';
+    src: local('Noto Sans Thai SemiCondensed Thin'), local('NotoSansThaiSemiCondensed-Thin'),
+        url('NotoSansThaiSemiCondensed-Thin.woff2') format('woff2');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans Thai SemiCondensed';
+    src: local('Noto Sans Thai SemiCondensed ExtraLight'), local('NotoSansThaiSemiCondensed-ExtraLight'),
+        url('NotoSansThaiSemiCondensed-ExtraLight.woff2') format('woff2');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans Thai SemiCondensed';
+    src: local('Noto Sans Thai SemiCondensed Light'), local('NotoSansThaiSemiCondensed-Light'),
+        url('NotoSansThaiSemiCondensed-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans Thai SemiCondensed';
+    src: local('Noto Sans Thai SemiCondensed Regular'), local('NotoSansThaiSemiCondensed-Regular'),
+        url('NotoSansThaiSemiCondensed-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans Thai SemiCondensed';
+    src: local('Noto Sans Thai SemiCondensed Medium'), local('NotoSansThaiSemiCondensed-Medium'),
+        url('NotoSansThaiSemiCondensed-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans Thai SemiCondensed';
+    src: local('Noto Sans Thai SemiCondensed SemiBold'), local('NotoSansThaiSemiCondensed-SemiBold'),
+        url('NotoSansThaiSemiCondensed-SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans Thai SemiCondensed';
+    src: local('Noto Sans Thai SemiCondensed Bold'), local('NotoSansThaiSemiCondensed-Bold'),
+        url('NotoSansThaiSemiCondensed-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans Thai SemiCondensed';
+    src: local('Noto Sans Thai SemiCondensed ExtraBold'), local('NotoSansThaiSemiCondensed-ExtraBold'),
+        url('NotoSansThaiSemiCondensed-ExtraBold.woff2') format('woff2');
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans Thai SemiCondensed';
+    src: local('Noto Sans Thai SemiCondensed Black'), local('NotoSansThaiSemiCondensed-Black'),
+        url('NotoSansThaiSemiCondensed-Black.woff2') format('woff2');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+
+/* Noto Sans Thai ExtraCondensed */
+@font-face {
+    font-family: 'Noto Sans Thai ExtraCondensed';
+    src: local('Noto Sans Thai ExtraCondensed Thin'), local('NotoSansThaiExtraCondensed-Thin'),
+        url('NotoSansThaiExtraCondensed-Thin.woff2') format('woff2');
+    font-weight: 100;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans Thai ExtraCondensed';
+    src: local('Noto Sans Thai ExtraCondensed ExtraLight'), local('NotoSansThaiExtraCondensed-ExtraLight'),
+        url('NotoSansThaiExtraCondensed-ExtraLight.woff2') format('woff2');
+    font-weight: 200;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans Thai ExtraCondensed';
+    src: local('Noto Sans Thai ExtraCondensed Light'), local('NotoSansThaiExtraCondensed-Light'),
+        url('NotoSansThaiExtraCondensed-Light.woff2') format('woff2');
+    font-weight: 300;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans Thai ExtraCondensed';
+    src: local('Noto Sans Thai ExtraCondensed Regular'), local('NotoSansThaiExtraCondensed-Regular'),
+        url('NotoSansThaiExtraCondensed-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans Thai ExtraCondensed';
+    src: local('Noto Sans Thai ExtraCondensed Medium'), local('NotoSansThaiExtraCondensed-Medium'),
+        url('NotoSansThaiExtraCondensed-Medium.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans Thai ExtraCondensed';
+    src: local('Noto Sans Thai ExtraCondensed SemiBold'), local('NotoSansThaiExtraCondensed-SemiBold'),
+        url('NotoSansThaiExtraCondensed-SemiBold.woff2') format('woff2');
+    font-weight: 600;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans Thai ExtraCondensed';
+    src: local('Noto Sans Thai ExtraCondensed Bold'), local('NotoSansThaiExtraCondensed-Bold'),
+        url('NotoSansThaiExtraCondensed-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans Thai ExtraCondensed';
+    src: local('Noto Sans Thai ExtraCondensed ExtraBold'), local('NotoSansThaiExtraCondensed-ExtraBold'),
+        url('NotoSansThaiExtraCondensed-ExtraBold.woff2') format('woff2');
+    font-weight: 800;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Noto Sans Thai ExtraCondensed';
+    src: local('Noto Sans Thai ExtraCondensed Black'), local('NotoSansThaiExtraCondensed-Black'),
+        url('NotoSansThaiExtraCondensed-Black.woff2') format('woff2');
+    font-weight: 900;
+    font-style: normal;
+    font-display: swap;
+}
+*/

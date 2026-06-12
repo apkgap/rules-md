@@ -1,0 +1,131 @@
+/* BEM naming convention: .exat-post-custom-query__[element]--[modifier] */
+
+.exat-post-custom-query__grid {
+    display: grid;
+    /* Uses the responsive CSS variable from Elementor columns control, falling back to 3 columns */
+    grid-template-columns: repeat(var(--exat-post-custom-query-cols, 3), minmax(0, 1fr));
+    gap: var(--exat-post-custom-query-gap, 1.5rem);
+}
+
+.exat-post-custom-query__card {
+    display: flex;
+    flex-direction: column;
+    background-color: var(--exat-card-bg-color, #ffffff);
+    border: 1px solid var(--exat-card-border-color, #e5e7eb);
+    border-radius: var(--exat-card-radius, 0.5rem);
+    overflow: hidden;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.exat-post-custom-query__card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+.exat-post-custom-query__card-image-wrapper {
+    position: relative;
+    width: 100%;
+    /* Aspect ratio fallback */
+    padding-top: 56.25%; 
+    background-color: #f3f4f6;
+}
+
+/* Aspect Ratio Modifiers via Elementor Prefix Class */
+.exat-post-custom-query--ratio-16-9 .exat-post-custom-query__card-image-wrapper {
+    padding-top: 56.25%; /* 16:9 ratio */
+}
+
+.exat-post-custom-query--ratio-4-3 .exat-post-custom-query__card-image-wrapper {
+    padding-top: 75%; /* 4:3 ratio */
+}
+
+.exat-post-custom-query--ratio-3-2 .exat-post-custom-query__card-image-wrapper {
+    padding-top: 66.66%; /* 3:2 ratio */
+}
+
+.exat-post-custom-query--ratio-1-1 .exat-post-custom-query__card-image-wrapper {
+    padding-top: 100%; /* 1:1 ratio */
+}
+
+.exat-post-custom-query__card-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.exat-post-custom-query__card-content {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    padding: 1.25rem;
+}
+
+.exat-post-custom-query__card-terms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.375rem;
+    margin-bottom: 0.5rem;
+}
+
+.exat-post-custom-query__card-term-item {
+    padding: 0.125rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    color: var(--exat-color-primary, #2563eb);
+    background-color: rgba(37, 99, 235, 0.1);
+    border-radius: 0.25rem;
+    text-transform: uppercase;
+}
+
+.exat-post-custom-query__card-title {
+    margin-bottom: 0.5rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.375;
+}
+
+.exat-post-custom-query__card-title a {
+    color: var(--exat-color-text-title, #1f2937);
+    text-decoration: none;
+}
+
+.exat-post-custom-query__card-title a:hover {
+    color: var(--exat-color-primary, #2563eb);
+}
+
+.exat-post-custom-query__card-excerpt {
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+    color: var(--exat-color-text-muted, #4b5563);
+    line-height: 1.5;
+}
+
+.exat-post-custom-query__card-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: auto;
+    padding-top: 0.75rem;
+    border-top: 1px solid var(--exat-card-border-color, #f3f4f6);
+}
+
+.exat-post-custom-query__card-date {
+    font-size: 0.75rem;
+    color: var(--exat-color-text-meta, #9ca3af);
+}
+
+.exat-post-custom-query__card-button {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--exat-color-primary, #2563eb);
+    text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+.exat-post-custom-query__card-button:hover {
+    color: var(--exat-color-primary-hover, #1d4ed8);
+    text-decoration: underline;
+}

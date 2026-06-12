@@ -1,0 +1,154 @@
+﻿/* Admin Investor Grid Styles - Refined */
+.starter-theme-investor-wrapper {
+    padding: 24px;
+    background: #fff;
+    border: 1px solid #c3c4c7;
+    box-shadow: 0 1px 1px rgba(0,0,0,.04);
+    margin-top: 20px;
+    max-width: 100%;
+    box-sizing: border-box;
+}
+
+.starter-theme-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.starter-theme-header h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1d2327;
+    margin: 0;
+}
+
+.starter-theme-group-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 24px;
+}
+
+/* 
+   We now use native .components-card
+   Overrides for specific behaviors if needed
+*/
+.starter-theme-group-card {
+    transition: all 0.2s ease;
+    height: 100%; /* Ensure full height in grid */
+    display: flex;
+    flex-direction: column;
+}
+
+.starter-theme-group-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* Enhance shadow on hover */
+    border-color: #2271b1;
+}
+
+/* Card Body overrides */
+.components-card__body {
+    flex-grow: 1; /* Push footer down */
+    display: flex;
+    flex-direction: column;
+}
+
+.components-card__footer {
+    border-top: 1px solid #f0f0f1;
+    justify-content: space-between;
+}
+
+/* Meta Styles */
+.starter-theme-card-meta {
+    margin-bottom: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px; 
+}
+
+.starter-theme-category-badge {
+    align-self: flex-start;
+    background: #f0f0f1;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+    color: #50575e;
+}
+
+.starter-theme-condition-text {
+    font-size: 12px;
+    color: #d63638;
+    font-style: italic;
+}
+
+/* File List on Card */
+.starter-theme-card-files {
+    margin-top: auto;
+    margin-bottom: 0; 
+}
+
+.starter-theme-card-files-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #8c8f94;
+    margin-bottom: 6px;
+    font-weight: 600;
+}
+
+.starter-theme-card-file-list {
+    display: flex;
+    flex-direction: column; /* Stack vertically */
+    gap: 4px;
+}
+
+.starter-theme-card-file-item {
+    background: #f6f7f7;
+    border: 1px solid #dcdcde;
+    border-radius: 3px;
+    padding: 3px 8px;
+    font-size: 11px;
+    color: #2c3338;
+    max-width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block; 
+}
+
+/* Actions */
+.starter-theme-card-actions {
+    /* Using Flex via CardFooter usually, but standardizing just in case */
+    display: flex;
+    align-items: center;
+}
+
+.starter-theme-actions-right {
+    margin-left: auto; /* Push to right */
+}
+
+/* Modal tweaks */
+/* Document Repeater Row */
+.starter-theme-file-item {
+    transition: all 0.2s ease;
+}
+.starter-theme-file-item:hover {
+    border-color: #2271b1 !important;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.starter-theme-file-fields .components-base-control__label {
+    font-size: 11px;
+    text-transform: uppercase;
+    color: #646970;
+    margin-bottom: 4px;
+}
+
+.starter-theme-investor-modal .components-modal__content {
+    padding: 0 !important;
+}
+
+.starter-theme-card-file-icons {
+    display: inline-flex;
+    align-items: center;
+}

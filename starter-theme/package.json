@@ -1,0 +1,81 @@
+﻿{
+  "name": "starter-theme",
+  "version": "1.0.0",
+  "description": "Starter Theme - A clean, reusable WordPress starter theme built with Tailwind CSS, Alpine.js, and Swiper.",
+  "author": "TAE Team",
+  "license": "GPL-2.0-or-later",
+  "keywords": [
+    "WordPress",
+    "Theme",
+    "Starter",
+    "Tailwind",
+    "AlpineJS"
+  ],
+  "homepage": "https://example.com/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/example/starter-theme.git"
+  },
+  "bugs": {
+    "url": "https://github.com/example/starter-theme/issues"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.1.18",
+    "@wordpress/api-fetch": "^7.39.0",
+    "@wordpress/components": "^32.1.0",
+    "@wordpress/element": "^6.39.0",
+    "@wordpress/i18n": "^6.12.0",
+    "@wordpress/icons": "^11.6.0",
+    "@wordpress/scripts": "^19.2.2",
+    "autoprefixer": "^10.4.20",
+    "browser-sync": "^3.0.4",
+    "dir-archiver": "^1.1.1",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.4.49",
+    "postcss-cli": "^11.0.0",
+    "rtlcss": "^3.5.0",
+    "sass": "^1.83.0",
+    "tailwindcss": "^4.0.0"
+  },
+  "rtlcssConfig": {
+    "options": {
+      "autoRename": false,
+      "autoRenameStrict": false,
+      "blacklist": {},
+      "clean": true,
+      "greedy": false,
+      "processUrls": false,
+      "stringMap": []
+    },
+    "plugins": [],
+    "map": false
+  },
+  "scripts": {
+    "start": "npm run dev",
+    "dev": "npm-run-all --parallel watch:tailwind watch:js watch:admin serve",
+    "serve": "browser-sync start --proxy \"http://kusmile.local\" --port 3000 --ui-port 3001 --files \"./**/*.php,./**/*.css,./**/*.js\" --ignore \"node_modules/**/*,vendor/**/*,.git/**/*\"",
+    "compile:css": "sass sass/:. && stylelint '*.css' --fix || true && stylelint '*.css' --fix",
+    "compile:rtl": "rtlcss style.css style-rtl.css",
+    "lint:scss": "wp-scripts lint-style 'sass/**/*.scss'",
+    "lint:js": "wp-scripts lint-js 'js/*.js'",
+    "bundle": "dir-archiver --src . --dest ../starter-theme.zip --exclude .DS_Store .stylelintrc.json .eslintrc .git .gitattributes .github .gitignore README.md composer.json composer.lock node_modules vendor package-lock.json package.json .travis.yml phpcs.xml.dist sass style.css.map yarn.lock",
+    "build:tailwind": "tailwindcss -i ./src/input.css -o ./dist/tailwind.css --minify",
+    "watch:tailwind": "tailwindcss -i ./src/input.css -o ./dist/tailwind.css --watch",
+    "watch:js": "esbuild src/js/app.js --bundle --outfile=dist/app.js --watch",
+    "build:js": "esbuild src/js/app.js --bundle --minify --outfile=dist/app.js",
+    "build:admin": "wp-scripts build src/admin/admin-theme-options.js --output-path=dist/admin",
+    "watch:admin": "wp-scripts start src/admin/admin-theme-options.js --output-path=dist/admin",
+    "build": "npm-run-all build:js build:tailwind build:admin"
+  },
+  "dependencies": {
+    "@alpinejs/collapse": "^3.15.8",
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@dnd-kit/utilities": "^3.2.2",
+    "@fortawesome/fontawesome-free": "^7.2.0",
+    "alpinejs": "^3.15.8",
+    "esbuild": "^0.27.3",
+    "remixicon": "^4.9.1",
+    "swiper": "^12.1.1"
+  }
+}
