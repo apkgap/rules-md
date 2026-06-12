@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 /**
  * Theme Options Page
@@ -188,8 +188,34 @@ class starter_theme_theme_options
     public function update_options_api($request)
     {
         $params = $request->get_json_params();
-        update_option('starter_theme_theme_options', $params);
-        return rest_ensure_response($params);
+        if ( ! is_array( $params ) ) {
+            return new WP_Error( 'invalid_data', 'Invalid parameters', [ 'status' => 400 ] );
+        }
+
+        $sanitized_params = $this->sanitize_options_recursively( $params );
+        update_option('starter_theme_theme_options', $sanitized_params);
+        return rest_ensure_response($sanitized_params);
+    }
+
+    private function sanitize_options_recursively( $value, $key = '' )
+    {
+        if ( is_array( $value ) ) {
+            $sanitized = [];
+            foreach ( $value as $k => $v ) {
+                $sanitized[ sanitize_key( $k ) ] = $this->sanitize_options_recursively( $v, $k );
+            }
+            return $sanitized;
+        }
+
+        $key = strtolower( (string) $key );
+        if ( strpos( $key, 'lines' ) !== false || strpos( $key, 'description' ) !== false || $key === 'starter_footer_fax' ) {
+            return sanitize_textarea_field( $value );
+        }
+        if ( strpos( $key, 'url' ) !== false ) {
+            return esc_url_raw( $value );
+        }
+
+        return sanitize_text_field( $value );
     }
 
     public function render_starter_footer_page()
