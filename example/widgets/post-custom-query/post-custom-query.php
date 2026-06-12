@@ -79,15 +79,37 @@ class EXAT_Post_Custom_Query_Widget extends \Elementor\Widget_Base {
             ]
         );
 
-        $this->add_control(
-            'filter_taxonomy',
-            [
-                'label'   => esc_html__( 'Taxonomy Filter', 'exat-theme' ),
-                'type'    => \Elementor\Controls_Manager::SELECT,
-                'default' => 'category',
-                'options' => $this->get_active_taxonomies(),
-            ]
-        );
+        // Fetch all public taxonomies dynamically and register a Select2 filter for each
+        $taxonomies = get_taxonomies( [ 'public' => true ], 'objects' );
+        if ( ! is_wp_error( $taxonomies ) && is_array( $taxonomies ) ) {
+            foreach ( $taxonomies as $taxonomy ) {
+                $terms = get_terms( [
+                    'taxonomy'   => $taxonomy->name,
+                    'hide_empty' => false,
+                ] );
+
+                $term_options = [];
+                if ( ! is_wp_error( $terms ) && is_array( $terms ) ) {
+                    foreach ( $terms as $term ) {
+                        $term_options[ $term->slug ] = $term->name;
+                    }
+                }
+
+                if ( ! empty( $term_options ) ) {
+                    $this->add_control( 'tax_filter_' . $taxonomy->name, [
+                        'label'       => sprintf( esc_html__( 'Filter by %s', 'exat-theme' ), $taxonomy->label ),
+                        'type'        => \Elementor\Controls_Manager::SELECT2,
+                        'multiple'    => true,
+                        'options'     => $term_options,
+                        'label_block' => true,
+                        'description' => sprintf( esc_html__( 'Select terms to filter from %s. Leave empty to show all.', 'exat-theme' ), $taxonomy->label ),
+                        'condition'   => [
+                            'query_post_type' => $taxonomy->object_type,
+                        ],
+                    ] );
+                }
+            }
+        }
 
         $this->add_control(
             'posts_per_page',
@@ -270,25 +292,29 @@ class EXAT_Post_Custom_Query_Widget extends \Elementor\Widget_Base {
             'ignore_sticky_posts' => true,
         ];
 
-        // Conditional taxonomy filter
-        if ( ! empty( $settings['filter_taxonomy'] ) ) {
-            $taxonomy = sanitize_key( $settings['filter_taxonomy'] );
-            $terms = get_terms( [
-                'taxonomy' => $taxonomy,
-                'fields'   => 'slugs',
-            ] );
-
-            if ( ! is_wp_error( $terms ) && ! empty( $terms ) ) {
-                $args['tax_query'] = [
-                    [
-                        'taxonomy'         => $taxonomy,
-                        'field'            => 'slug',
-                        'terms'            => $terms,
-                        'operator'         => 'IN',
-                        'include_children' => true,
-                    ]
-                ];
+        // Build tax_query dynamically based on selected terms for all taxonomies
+        $tax_query = [];
+        $taxonomies = get_taxonomies( [ 'public' => true ], 'objects' );
+        if ( ! is_wp_error( $taxonomies ) && is_array( $taxonomies ) ) {
+            foreach ( $taxonomies as $taxonomy ) {
+                $control_key = 'tax_filter_' . $taxonomy->name;
+                if ( ! empty( $settings[ $control_key ] ) && is_array( $settings[ $control_key ] ) ) {
+                    $tax_query[] = [
+                        'taxonomy' => $taxonomy->name,
+                        'field'    => 'slug',
+                        'terms'    => array_map( 'sanitize_key', $settings[ $control_key ] ),
+                        'operator' => 'IN',
+                    ];
+                }
             }
+        }
+
+        if ( count( $tax_query ) > 1 ) {
+            $tax_query['relation'] = 'AND';
+        }
+
+        if ( ! empty( $tax_query ) ) {
+            $args['tax_query'] = $tax_query;
         }
 
         return $args;
@@ -306,7 +332,6 @@ class EXAT_Post_Custom_Query_Widget extends \Elementor\Widget_Base {
         $show_terms   = $settings['show_terms'] === 'yes';
         $show_button  = $settings['show_button'] === 'yes';
         $button_text  = ! empty( $settings['button_text'] ) ? $settings['button_text'] : esc_html__( 'Read More', 'exat-theme' );
-        $taxonomy     = ! empty( $settings['filter_taxonomy'] ) ? sanitize_key( $settings['filter_taxonomy'] ) : 'category';
 
         if ( $query->have_posts() ) {
             // HTML attributes convention: id must come before class
@@ -331,8 +356,20 @@ class EXAT_Post_Custom_Query_Widget extends \Elementor\Widget_Base {
 
                     <div class="exat-post-custom-query__card-content">
                         <?php if ( $show_terms ) : 
-                            $post_terms = get_the_terms( $post_id, $taxonomy );
-                            if ( ! is_wp_error( $post_terms ) && ! empty( $post_terms ) ) : ?>
+                            $post_terms = [];
+                            $post_type = get_post_type( $post_id );
+                            $post_taxonomies = get_object_taxonomies( $post_type, 'names' );
+                            if ( ! empty( $post_taxonomies ) ) {
+                                foreach ( $post_taxonomies as $tax ) {
+                                    $terms = get_the_terms( $post_id, $tax );
+                                    if ( ! is_wp_error( $terms ) && ! empty( $terms ) ) {
+                                        foreach ( $terms as $term ) {
+                                            $post_terms[] = $term;
+                                        }
+                                    }
+                                }
+                            }
+                            if ( ! empty( $post_terms ) ) : ?>
                                 <div class="exat-post-custom-query__card-terms">
                                     <?php foreach ( $post_terms as $term ) : ?>
                                         <span class="exat-post-custom-query__card-term-item">
