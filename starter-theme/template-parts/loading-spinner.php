@@ -1,9 +1,13 @@
-﻿<?php
+<?php
 /**
  * Template part for displaying loading spinner
  *
  * @package starter_theme
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 $size = isset( $size ) ? $size : 'md';
 

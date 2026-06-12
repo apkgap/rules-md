@@ -1,9 +1,13 @@
-﻿<?php
+<?php
 /**
  * Template part for displaying branch selector buttons with dropdown pills.
  *
  * @package starter_theme
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 $branches = starter_theme_get_option('header_branches');
 
@@ -88,7 +92,7 @@ if (empty($branches) || !is_array($branches)) {
 				<!-- Branch Info & Phones -->
 				<div class="flex flex-col md:flex-row md:items-center gap-3 w-full">
 					<span class="text-base md:text-lg font-bold whitespace-nowrap" style="color: var(--custom-header-text, var(--text-base));">
-						<?php echo $label; ?>
+						<?php echo esc_html($label); ?>
 					</span>
 					
 					<!-- Phone Pills -->
@@ -99,7 +103,7 @@ if (empty($branches) || !is_array($branches)) {
 							<a 
 								href="tel:<?php echo esc_attr($clean_phone); ?>"
 								class="inline-flex items-center justify-center px-4 py-1.5 text-xs font-light text-white rounded-2xl transition-all duration-300 hover:scale-105 active:scale-95 shadow-sm hover:shadow-md"
-								style="background-color: <?php echo $color; ?>; color: #ffffff;"
+								style="background-color: <?php echo esc_attr($color); ?>; color: #ffffff;"
 							>
 								<?php echo esc_html($phone); ?>
 							</a>
@@ -110,3 +114,4 @@ if (empty($branches) || !is_array($branches)) {
 		<?php endforeach; ?>
 	</div>
 </div>
+

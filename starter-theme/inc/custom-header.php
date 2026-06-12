@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Sample implementation of the Custom Header feature
  *
@@ -10,6 +10,10 @@
  *
  * @package starter_theme
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Set up the WordPress core custom header feature.

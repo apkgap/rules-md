@@ -1,5 +1,4 @@
-﻿<?php
-
+<?php
 /**
  * Custom template tags for this theme
  *
@@ -7,6 +6,10 @@
  *
  * @package starter_theme
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 if (! function_exists('starter_theme_posted_on')) :
 	/**

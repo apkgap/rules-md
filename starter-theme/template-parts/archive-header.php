@@ -1,5 +1,4 @@
-﻿<?php
-
+<?php
 /**
  * Template part for displaying archive headers (Title, Breadcrumbs, Description)
  * 
@@ -10,6 +9,10 @@
  * - description (string|null)
  * - breadcrumb_custom (string|null)
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly.
+}
 
 $title       = $args['title'] ?? '';
 $description = $args['description'] ?? get_the_archive_description();
@@ -58,13 +61,13 @@ if ($show_bg && !empty($bg_image)) {
                     <?php yoast_breadcrumb('<div id="breadcrumbs" class="text-sm uppercase tracking-widest ' . $muted_class . ' font-medium [&_a]:hover:text-primary transition-all">', '</div>'); ?>
                 <?php else : ?>
                     <div id="archive-breadcrumb-list" class="text-sm uppercase tracking-widest <?php echo esc_attr($muted_class); ?> font-medium flex items-center gap-2">
-                        <a href="<?php echo home_url(); ?>" class="hover:text-primary transition-colors"><?php echo esc_html__('หน้าหลัก', 'starter-theme'); ?></a>
+                        <a href="<?php echo esc_url(home_url()); ?>" class="hover:text-primary transition-colors"><?php echo esc_html__('หน้าหลัก', 'starter-theme'); ?></a>
                         <span class="w-3 h-3 flex items-center justify-center border-border-base opacity-40"><i class="ri-arrow-right-line"></i></span>
                         <span class="<?php echo $show_bg ? 'text-white' : 'text-primary'; ?>">
                             <?php
-                            if (is_category()) echo $cat_title;
-                            elseif (is_tag()) echo $tag_title;
-                            elseif (is_author()) echo $author_name;
+                            if (is_category()) echo esc_html($cat_title);
+                            elseif (is_tag()) echo esc_html($tag_title);
+                            elseif (is_author()) echo esc_html($author_name);
                             else echo esc_html($title);
                             ?>
                         </span>
@@ -86,4 +89,4 @@ if ($show_bg && !empty($bg_image)) {
             <?php endif; ?>
         </div>
     </div>
-</header>
+</header>

@@ -1,9 +1,13 @@
-﻿<?php
+<?php
 /**
  * Enqueue scripts and styles.
  *
  * @package starter_theme
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 function starter_theme_scripts()
 {
@@ -30,11 +34,13 @@ function starter_theme_scripts()
     }
 
     // Enqueue Tailwind CSS (Load First)
+    $tailwind_css_path = get_template_directory() . '/dist/tailwind.css';
+    $tailwind_css_ver = file_exists($tailwind_css_path) ? filemtime($tailwind_css_path) : _S_VERSION;
     wp_enqueue_style(
         'starter-theme-tailwind',
         get_template_directory_uri() . '/dist/tailwind.css',
         array('roboto-local', 'noto-sans-thai'),
-        filemtime(get_template_directory() . '/dist/tailwind.css')
+        $tailwind_css_ver
     );
 
     // Remix Icon (Local)
@@ -86,7 +92,15 @@ function starter_theme_scripts()
 
     wp_style_add_data('starter-theme-style', 'rtl', 'replace');
 
-    wp_enqueue_script('starter-theme-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true);
+    $nav_js_path = get_template_directory() . '/js/navigation.js';
+    $nav_js_ver = file_exists($nav_js_path) ? filemtime($nav_js_path) : _S_VERSION;
+    wp_enqueue_script(
+        'starter-theme-navigation',
+        get_template_directory_uri() . '/js/navigation.js',
+        array(),
+        $nav_js_ver,
+        true
+    );
 
     if (is_singular() && comments_open() && get_option('thread_comments')) {
         wp_enqueue_script('comment-reply');

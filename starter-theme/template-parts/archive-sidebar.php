@@ -1,5 +1,4 @@
-﻿<?php
-
+<?php
 /**
  * Template part for displaying archive sidebar (Filters + Single Sidebar)
  *
@@ -11,7 +10,12 @@
  * - years (array)
  * - filter_year (int)
  * - cat_obj (object|null)
+ * - recommended_query (WP_Query|null)
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly.
+}
 
 $archive_url       = $args['archive_url'] ?? '';
 $search_q          = $args['search_q'] ?? '';
@@ -20,6 +24,11 @@ $filter_year        = $args['filter_year'] ?? 0;
 $cat_obj            = $args['cat_obj'] ?? null;
 $search_field_name  = $args['search_field_name'] ?? 'keyword';
 $is_search_mode     = $args['is_search'] ?? false;
+$recommended        = $args['recommended_query'] ?? null;
+
+if ($recommended) {
+    $recommended->rewind_posts();
+}
 ?>
 
 <!-- Archive Filter Widget (Universal) -->
@@ -60,19 +69,7 @@ $is_search_mode     = $args['is_search'] ?? false;
 </div>
 
 <!-- Recommended Posts Widget -->
-<?php
-$recommended_args = [
-    'post_type'      => 'post',
-    'posts_per_page' => 5,
-    'post_status'    => 'publish',
-    'orderby'        => 'date',
-    'order'          => 'DESC',
-];
-if ($cat_obj) {
-    $recommended_args['category__in'] = [$cat_obj->term_id];
-}
-$recommended = new WP_Query($recommended_args);
-if ($recommended->have_posts()) : ?>
+<?php if ($recommended && $recommended->have_posts()) : ?>
     <div id="starter-theme-sidebar-recommended" class="starter-theme-sidebar-widget bg-surface-base p-6 rounded-2xl border border-border-base shadow-sm transition-colors duration-500 mt-6">
         <h4 id="sidebar-recommended-title" class="font-display text-sm font-bold text-muted uppercase tracking-[0.18em] mb-5 flex items-center gap-2.5">
             <span class="w-6 h-0.5 bg-primary opacity-40 rounded-full"></span>
@@ -107,3 +104,4 @@ if ($recommended->have_posts()) : ?>
         </div>
     </div>
 <?php endif; ?>
+

@@ -1,8 +1,12 @@
-﻿<?php
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 if ( ! isset( $pagination ) || ! is_array( $pagination ) ) {
 	$pagination = get_query_var( 'pagination' );
 }
+
 
 if ( empty( $pagination ) || ! is_array( $pagination ) ) {
 	return;

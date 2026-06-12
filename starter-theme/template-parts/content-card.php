@@ -1,10 +1,13 @@
-﻿<?php
-
+<?php
 /**
  * Template part for displaying a news card in archive/index loops
  *
  * @package starter_theme
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly.
+}
 
 $image_url = get_the_post_thumbnail_url(get_the_ID(), 'medium_large');
 $cats      = get_the_category();
@@ -26,7 +29,7 @@ $cat_name  = !empty($cats) ? esc_html($cats[0]->name) : '';
         <?php endif; ?>
         <?php if ($cat_name) : ?>
             <span class="absolute top-3 left-3 bg-primary text-white text-sm font-semibold uppercase tracking-wider px-2.5 py-1 rounded-sm">
-                <?php echo $cat_name; ?>
+                <?php echo esc_html($cat_name); ?>
             </span>
         <?php endif; ?>
     </a>
@@ -46,4 +49,4 @@ $cat_name  = !empty($cats) ? esc_html($cats[0]->name) : '';
         </div>
     </div>
 
-</article>
+</article>

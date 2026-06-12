@@ -1,4 +1,7 @@
-﻿<?php
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 if (! isset($pagination) || ! is_array($pagination)) {
 	$pagination = get_query_var('pagination');
@@ -82,31 +85,4 @@ $summary_text = sprintf(
 
 		<p class="m-0 text-center text-[0.6875rem] text-starter-icon-subdued md:text-right md:text-[0.95rem]"><?php echo esc_html($summary_text); ?></p>
 	</div>
-</nav>
-<script>
-	document.addEventListener('submit', function(event) {
-		var form = event.target;
-		if (!form || !form.classList || !form.classList.contains('starter-theme-pagination__jump-form')) {
-			return;
-		}
-		event.preventDefault();
-		var input = form.querySelector('input[name="paged"]');
-		var value = parseInt(input && input.value ? input.value : '1', 10);
-		var total = parseInt(input && input.max ? input.max : '1', 10);
-		if (Number.isNaN(value)) {
-			value = 1;
-		}
-		if (value < 1) {
-			value = 1;
-		}
-		if (value > total) {
-			value = total;
-		}
-		var base = form.getAttribute('data-jump-base');
-		if (base && base.indexOf('%#%') !== -1) {
-			window.location.href = base.replace('%#%', value);
-			return;
-		}
-		form.submit();
-	});
-</script>
+</nav>

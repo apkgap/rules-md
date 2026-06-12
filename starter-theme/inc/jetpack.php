@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Jetpack Compatibility File
  *
@@ -6,6 +6,10 @@
  *
  * @package starter_theme
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Jetpack setup function.

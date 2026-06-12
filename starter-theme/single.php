@@ -1,5 +1,4 @@
-﻿<?php
-
+<?php
 /**
  * The template for displaying all single posts
  * 
@@ -7,6 +6,10 @@
  * 
  * @package starter_theme
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly.
+}
 
 get_header();
 
@@ -21,6 +24,19 @@ while (have_posts()) : the_post();
     $author_name = get_the_author();
     $author_url = get_author_posts_url($author_id);
     $author_avatar = get_avatar($author_id, 96);
+
+    // Fetch related posts for sidebar widget (controller layer)
+    $related_args = [
+        'post_type'      => 'post',
+        'posts_per_page' => 5,
+        'post__not_in'   => [$post_id],
+        'orderby'        => 'date',
+        'order'          => 'DESC',
+    ];
+    if ($cat_obj) {
+        $related_args['category__in'] = [$cat_obj->term_id];
+    }
+    $related_query = new WP_Query($related_args);
 ?>
 
     <article id="post-<?php the_ID(); ?>"
@@ -65,12 +81,13 @@ while (have_posts()) : the_post();
                                 $tags = get_the_tags();
                                 if ($tags) :
                                     foreach ($tags as $tag) : ?>
-                                        <a href="<?php echo get_tag_link($tag->term_id); ?>" class="px-4 py-2 bg-surface-base/40 hover:bg-primary hover:text-secondary text-base text-[11px] font-medium rounded-xl transition-all border border-border-base/60 hover:border-primary group">
-                                            <span class="opacity-40 group-hover:opacity-100 italic mr-0.5 transition-opacity">#</span><?php echo $tag->name; ?>
+                                        <a href="<?php echo esc_url(get_tag_link($tag->term_id)); ?>" class="px-4 py-2 bg-surface-base/40 hover:bg-primary hover:text-secondary text-base text-[11px] font-medium rounded-xl transition-all border border-border-base/60 hover:border-primary group">
+                                            <span class="opacity-40 group-hover:opacity-100 italic mr-0.5 transition-opacity">#</span><?php echo esc_html($tag->name); ?>
                                         </a>
                                 <?php endforeach;
                                 endif; ?>
                             </div>
+
 
                             <!-- Related Posts Section (Horizontal Grid) -->
                             <div class="starter-theme-related-posts-bottom mt-[2em] pt-[2em] border-t border-border-base">
@@ -101,7 +118,7 @@ while (have_posts()) : the_post();
 
                     <!-- REFINED DESKTOP SIDEBAR -->
                     <aside class="hidden lg:block w-[320px] xl:w-[380px] sticky top-28 space-y-12">
-                        <?php get_template_part('template-parts/single-sidebar', null, ['cat_obj' => $cat_obj]); ?>
+                        <?php get_template_part('template-parts/single-sidebar', null, ['related_query' => $related_query]); ?>
                     </aside>
 
                 </div>
@@ -146,7 +163,7 @@ while (have_posts()) : the_post();
 
                 <!-- Content Area -->
                 <div class="flex-1 overflow-y-auto p-6 space-y-10">
-                    <?php get_template_part('template-parts/single-sidebar', null, ['cat_obj' => $cat_obj]); ?>
+                    <?php get_template_part('template-parts/single-sidebar', null, ['related_query' => $related_query]); ?>
                 </div>
             </div>
         </div>

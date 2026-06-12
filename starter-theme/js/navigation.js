@@ -1,4 +1,4 @@
-﻿/**
+/**
  * File navigation.js.
  *
  * Handles toggling the navigation menu for small screens and enables TAB key
@@ -97,3 +97,56 @@
 		}
 	}
 }() );
+
+/**
+ * Handle pagination page jump form submit events globally
+ */
+document.addEventListener('submit', function(event) {
+	var form = event.target;
+	if (!form || !form.classList || !form.classList.contains('starter-theme-pagination__jump-form')) {
+		return;
+	}
+	event.preventDefault();
+	var input = form.querySelector('input[name="paged"]');
+	var value = parseInt(input && input.value ? input.value : '1', 10);
+	var total = parseInt(input && input.max ? input.max : '1', 10);
+	if (Number.isNaN(value)) {
+		value = 1;
+	}
+	if (value < 1) {
+		value = 1;
+	}
+	if (value > total) {
+		value = total;
+	}
+	var base = form.getAttribute('data-jump-base');
+	if (base && base.indexOf('%#%') !== -1) {
+		window.location.href = base.replace('%#%', value);
+		return;
+	}
+	form.submit();
+});
+
+/**
+ * Global Switchery Initializer (replacing inline scripts)
+ */
+function initStarterThemeSwitches() {
+	if (typeof Switchery !== 'undefined') {
+		var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+		elems.forEach(function(html) {
+			// Check if already initialized by checking for the Switchery sibling
+			if (!html.nextSibling || !html.nextSibling.classList || !html.nextSibling.classList.contains('switchery')) {
+				var size = html.getAttribute('data-size') || 'default';
+				var disabled = html.disabled;
+				new Switchery(html, {
+					size: size,
+					disabled: disabled
+				});
+			}
+		});
+	}
+}
+document.addEventListener('DOMContentLoaded', initStarterThemeSwitches);
+window.initStarterThemeSwitches = initStarterThemeSwitches;
+
+

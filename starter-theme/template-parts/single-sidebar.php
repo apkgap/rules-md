@@ -1,17 +1,23 @@
-﻿<?php
-
+<?php
 /**
  * Sidebar content for single posts
  * 
  * @package starter_theme
  */
 
-$cat_obj = $args['cat_obj'] ?? null;
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly.
+}
+
+$related = $args['related_query'] ?? null;
+if ($related) {
+    $related->rewind_posts();
+}
 ?>
 
 <!-- Search Widget (Elegant) -->
 <div class="starter-theme-sidebar-widget mb-12">
-    <form role="search" method="get" class="relative group" action="<?php echo home_url('/'); ?>">
+    <form role="search" method="get" class="relative group" action="<?php echo esc_url(home_url('/')); ?>">
         <input type="search" class="w-full bg-surface-base border border-border-base rounded-2xl py-4 pl-5 pr-12 text-sm text-base focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/20 transition-all font-sans shadow-sm"
             placeholder="<?php echo esc_attr_x('Search Articles...', 'placeholder', 'starter-theme'); ?>" value="<?php echo get_search_query(); ?>" name="s" />
         <button type="submit" class="absolute right-4 top-1/2 -translate-y-1/2 text-muted group-hover:text-primary transition-colors">
@@ -23,19 +29,7 @@ $cat_obj = $args['cat_obj'] ?? null;
 </div>
 
 <!-- Related Posts Widget (Premium List) -->
-<?php
-$related_args = [
-    'post_type'      => 'post',
-    'posts_per_page' => 5,
-    'post__not_in'   => [get_the_ID()],
-    'orderby'        => 'date',
-    'order'          => 'DESC',
-];
-if ($cat_obj) {
-    $related_args['category__in'] = [$cat_obj->term_id];
-}
-$related = new WP_Query($related_args);
-if ($related->have_posts()) : ?>
+<?php if ($related && $related->have_posts()) : ?>
     <div class="starter-theme-sidebar-widget mb-12">
         <h4 class="font-display text-[14px] font-medium text-muted mb-8 uppercase tracking-[0.2em] flex items-center gap-3">
             <span class="w-8 h-px bg-primary opacity-30"></span>
@@ -48,4 +42,4 @@ if ($related->have_posts()) : ?>
             wp_reset_postdata(); ?>
         </div>
     </div>
-<?php endif; ?>
+<?php endif; ?>

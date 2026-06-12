@@ -1,10 +1,13 @@
-﻿<?php
-
+<?php
 /**
  * Simple PSR-4 Autoloader for Starter Theme
  *
  * @package starter_theme
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly.
+}
 
 spl_autoload_register(function ($class) {
     // Project-specific namespace prefix

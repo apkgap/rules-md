@@ -1,10 +1,13 @@
-﻿<?php
-
+<?php
 /**
  * The template for displaying archive pages
  *
  * @package starter_theme
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 get_header();
 
@@ -45,6 +48,19 @@ $has_filter  = $search_q || $filter_year;
 global $wpdb;
 $year_sql = "SELECT DISTINCT YEAR(p.post_date) AS y FROM {$wpdb->posts} p WHERE p.post_status = 'publish' AND p.post_type = 'post'";
 $years    = $wpdb->get_col($year_sql . " ORDER BY y DESC");
+
+// Query recommended posts for archive-sidebar (controller layer)
+$recommended_args = [
+    'post_type'      => 'post',
+    'posts_per_page' => 5,
+    'post_status'    => 'publish',
+    'orderby'        => 'date',
+    'order'          => 'DESC',
+];
+if ($cat_obj) {
+    $recommended_args['category__in'] = [$cat_obj->term_id];
+}
+$recommended_query = new WP_Query($recommended_args);
 ?>
 
 <div x-data="{ sidebarOpen: false }" class="bg-bg-base min-h-screen pb-20">
@@ -101,7 +117,8 @@ $years    = $wpdb->get_col($year_sql . " ORDER BY y DESC");
                         'search_q'    => $search_q,
                         'years'       => $years,
                         'filter_year' => $filter_year,
-                        'cat_obj'     => $cat_obj
+                        'cat_obj'     => $cat_obj,
+                        'recommended_query' => $recommended_query
                     ]); ?>
                 </aside>
             </div>
@@ -153,7 +170,8 @@ $years    = $wpdb->get_col($year_sql . " ORDER BY y DESC");
                         'search_q'    => $search_q,
                         'years'       => $years,
                         'filter_year' => $filter_year,
-                        'cat_obj'     => $cat_obj
+                        'cat_obj'     => $cat_obj,
+                        'recommended_query' => $recommended_query
                     ]); ?>
                 </div>
             </div>

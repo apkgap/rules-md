@@ -1,5 +1,4 @@
-﻿<?php
-
+<?php
 /**
  * Mobile Menu Walker (Drilldown / Step Style)
  *
@@ -9,6 +8,10 @@
  *
  * @package starter_theme
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly.
+}
 
 class Mobile_Menu_Walker extends Walker_Nav_Menu
 {

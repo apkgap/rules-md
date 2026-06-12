@@ -28,7 +28,7 @@ function starter_theme_migrate_legacy_theme_options()
 }
 add_action('after_setup_theme', 'starter_theme_migrate_legacy_theme_options', 1);
 
-class starter_theme_theme_options
+class Starter_Theme_Options
 {
     public function __construct()
     {
@@ -260,7 +260,7 @@ class starter_theme_theme_options
     }
 }
 
-new starter_theme_theme_options();
+new Starter_Theme_Options();
 
 /**
  * Helper function to get theme option

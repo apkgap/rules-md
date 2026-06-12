@@ -1,9 +1,13 @@
-﻿<?php
+<?php
 /**
  * Template part for displaying alert/notification
  *
  * @package starter_theme
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 $type     = isset( $type ) ? $type : 'info';
 $title    = isset( $title ) ? $title : '';

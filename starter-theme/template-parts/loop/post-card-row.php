@@ -1,5 +1,4 @@
-﻿<?php
-
+<?php
 /**
  * Template part for displaying posts in a loop/archive (Row/Horizontal Style)
  * 
@@ -7,6 +6,10 @@
  * 
  * @package starter_theme
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly.
+}
 
 $post_id = get_the_ID();
 $categories = get_the_category($post_id);
@@ -51,7 +54,7 @@ $reading_time = $reading_time > 0 ? $reading_time : 1;
                     foreach (array_slice($categories, 0, 3) as $key => $cat) :
                         $color = $color_classes[$key % count($color_classes)];
                     ?>
-                        <span class="px-4 py-1.5 <?php echo $color; ?> rounded-full text-[11px] font-bold uppercase tracking-widest leading-none border border-border-base/10 transition-colors">
+                        <span class="px-4 py-1.5 <?php echo esc_attr($color); ?> rounded-full text-[11px] font-bold uppercase tracking-widest leading-none border border-border-base/10 transition-colors">
                             <?php echo esc_html($cat->name); ?>
                         </span>
                     <?php endforeach; ?>
@@ -100,10 +103,10 @@ $reading_time = $reading_time > 0 ? $reading_time : 1;
                     <span class="w-3 h-3 flex items-center justify-center">
                         <i class="ri-arrow-right-line"></i>
                     </span>
-                    <span class="text-xs font-medium"><?php echo $reading_time; ?> minute</span>
+                    <span class="text-xs font-medium"><?php echo esc_html($reading_time); ?> minute</span>
                 </div>
             </div>
 
         </div>
     </div>
-</article>
+</article>

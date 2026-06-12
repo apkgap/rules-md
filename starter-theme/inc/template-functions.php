@@ -1,10 +1,13 @@
-﻿<?php
-
+<?php
 /**
  * Functions which enhance the theme by hooking into WordPress
  *
  * @package starter_theme
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Adds custom classes to the array of body classes.
@@ -153,7 +156,7 @@ function starter_theme_page_title_hero($args = [])
 	// Title fallback
 	$title = $args['title'] ?: get_the_title($args['post_id']);
 ?>
-	<section id="page-title-hero" class="relative w-full h-full py-[3em] md:py-[4em] lg:py-[10em] pt-[5em] lg:pb-[5em] px-[1.5em] md:px-[2em] xl:px-0 flex items-center overflow-hidden <?php echo esc_attr($bg_class); ?>" style="<?php echo $bg_style; ?>">
+	<section id="page-title-hero" class="relative w-full h-full py-[3em] md:py-[4em] lg:py-[10em] pt-[5em] lg:pb-[5em] px-[1.5em] md:px-[2em] xl:px-0 flex items-center overflow-hidden <?php echo esc_attr($bg_class); ?>" style="<?php echo esc_attr($bg_style); ?>">
 
 		<?php if ($has_bg_image) : ?>
 			<!-- Gradient Overlay for better text readability -->
@@ -300,7 +303,7 @@ function starter_theme_article_header($args = [])
 		$muted_class = 'text-white/70 relative z-10';
 	}
 ?>
-	<header id="starter-theme-article-header-<?php echo esc_attr($post_id); ?>" class="starter-theme-article-header transition-colors duration-500 <?php echo esc_attr($header_class); ?>" style="<?php echo $bg_style; ?>">
+	<header id="starter-theme-article-header-<?php echo esc_attr($post_id); ?>" class="starter-theme-article-header transition-colors duration-500 <?php echo esc_attr($header_class); ?>" style="<?php echo esc_attr($bg_style); ?>">
 		<?php if ($args['has_bg'] && !empty($args['bg_image'])) : ?>
 			<div class="absolute inset-0 bg-black/40 z-0"></div>
 		<?php endif; ?>
@@ -310,12 +313,12 @@ function starter_theme_article_header($args = [])
 				<!-- Breadcrumbs & Category Badge -->
 				<div class="flex flex-wrap items-center gap-4 mb-10 overflow-hidden">
 					<nav class="starter-theme-breadcrumb text-sm uppercase tracking-widest <?php echo esc_attr($muted_class); ?> font-medium flex items-center gap-2">
-						<a href="<?php echo home_url(); ?>" class="hover:text-primary transition-colors"><?php echo esc_html__('หน้าหลัก', 'starter-theme'); ?></a>
+						<a href="<?php echo esc_url(home_url()); ?>" class="hover:text-primary transition-colors"><?php echo esc_html__('หน้าหลัก', 'starter-theme'); ?></a>
 						<span class="w-3 h-3 border-border-base opacity-40 flex items-center justify-center">
 							<i class="ri-arrow-right-s-line"></i>
 						</span>
 						<?php if ($cat_obj) : ?>
-							<a href="<?php echo get_category_link($cat_obj->term_id); ?>" class="<?php echo ($args['has_bg']) ? 'text-white' : 'text-primary'; ?> hover:opacity-80 transition-all font-display"><?php echo esc_html($cat_obj->name); ?></a>
+							<a href="<?php echo esc_url(get_category_link($cat_obj->term_id)); ?>" class="<?php echo ($args['has_bg']) ? 'text-white' : 'text-primary'; ?> hover:opacity-80 transition-all font-display"><?php echo esc_html($cat_obj->name); ?></a>
 						<?php endif; ?>
 					</nav>
 				</div>

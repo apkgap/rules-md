@@ -1,9 +1,13 @@
-﻿<?php
+<?php
 /**
  * Add Featured Image column to admin posts list
  *
  * @package starter_theme
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly.
+}
 
 // Add the thumbnail column
 add_filter('manage_posts_columns', 'starter_theme_add_thumbnail_column', 5);

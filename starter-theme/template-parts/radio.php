@@ -1,7 +1,12 @@
-﻿<?php
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 if ( ! isset( $radio ) || ! is_array( $radio ) ) {
 	$radio = get_query_var( 'radio' );
 }
+
 
 if ( empty( $radio ) || ! is_array( $radio ) ) {
 	return;

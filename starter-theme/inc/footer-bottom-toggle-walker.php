@@ -1,5 +1,4 @@
-﻿<?php
-
+<?php
 /**
  * Footer Bottom Toggle Walker
  *
@@ -8,6 +7,10 @@
  *
  * @package starter_theme
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly.
+}
 
 if (!class_exists('Footer_Bottom_Toggle_Walker')) {
     class Footer_Bottom_Toggle_Walker extends Walker_Nav_Menu

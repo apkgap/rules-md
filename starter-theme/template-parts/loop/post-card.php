@@ -1,5 +1,4 @@
-﻿<?php
-
+<?php
 /**
  * Template part for displaying posts in a loop/archive grid
  * 
@@ -7,6 +6,10 @@
  * 
  * @package starter_theme
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly.
+}
 
 $post_id = get_the_ID();
 $cat = get_the_category($post_id);
@@ -72,8 +75,8 @@ $main_cat = !empty($cat) ? $cat[0] : null;
                 <span class="w-3 h-3 flex items-center justify-center">
                     <i class="ri-arrow-right-line"></i>
                 </span>
-                <span class="text-[11px] font-medium"><?php echo $reading_time; ?> min</span>
+                <span class="text-[11px] font-medium"><?php echo esc_html($reading_time); ?> min</span>
             </div>
         </div>
     </div>
-</article>
+</article>

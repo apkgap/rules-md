@@ -1,4 +1,8 @@
-﻿<?php
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 if ( ! isset( $switch ) || ! is_array( $switch ) ) {
 	$switch = get_query_var( 'switch' );
 }
@@ -39,17 +43,6 @@ $label_class = $disabled ? 'text-starter-icon-disabled' : 'text-starter-text-bla
 		<?php disabled( $disabled ); ?>
 		<?php echo $hint_id ? 'aria-describedby="' . esc_attr( $hint_id ) . '"' : ''; ?>
 	>
-	<script>
-		(function() {
-			var elem = document.getElementById('<?php echo esc_js( $id ); ?>');
-			if (elem && window.Switchery) {
-				new Switchery(elem, {
-					size: '<?php echo esc_js( $size ); ?>',
-					disabled: <?php echo $disabled ? 'true' : 'false'; ?>
-				});
-			}
-		})();
-	</script>
 	<?php if ( $show_label && ( '' !== $label || '' !== $description ) ) : ?>
 		<span class="starter-theme-switch__content flex min-w-0 flex-col gap-0.5">
 			<?php if ( '' !== $label ) : ?>
@@ -61,3 +54,4 @@ $label_class = $disabled ? 'text-starter-icon-disabled' : 'text-starter-text-bla
 		</span>
 	<?php endif; ?>
 </label>
+

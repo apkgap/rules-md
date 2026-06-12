@@ -1,5 +1,4 @@
-﻿<?php
-
+<?php
 /**
  * Custom Walker for Footer Menu with Accordion/Dropdown Support
  * 
@@ -8,6 +7,10 @@
  * 
  * @package starter_theme
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly.
+}
 
 class Footer_Accordion_Walker extends Walker_Nav_Menu
 {

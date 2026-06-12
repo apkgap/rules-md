@@ -1,7 +1,12 @@
-﻿<?php
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
+
 if ( ! isset( $select ) || ! is_array( $select ) ) {
 	$select = get_query_var( 'select' );
 }
+
 
 if ( empty( $select ) || ! is_array( $select ) ) {
 	return;

@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Simple Footer Menu Walker
  *
@@ -7,6 +7,10 @@
  *
  * @package starter_theme
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly.
+}
 
 if (!class_exists('Footer_Simple_Walker')) {
     class Footer_Simple_Walker extends Walker_Nav_Menu

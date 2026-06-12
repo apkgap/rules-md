@@ -1,10 +1,13 @@
-﻿<?php
-
+<?php
 /**
  * Custom Full Pagination
  *
  * @package starter_theme
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly.
+}
 
 if (!function_exists('starter_theme_get_pagination_query')) {
     function starter_theme_get_pagination_query($query = null)
@@ -216,7 +219,7 @@ if (!function_exists('starter_theme_full_pagination')) {
                 // If it is the previous or next link, give it padding instead of fixed width
                 if (strpos($page, 'prev') !== false || strpos($page, 'next') !== false) {
                     $page = str_replace("page-numbers", "px-4 h-10 rounded-xl bg-white border border-[#e2e6ee] text-[#8892a4] flex items-center justify-center text-xs font-semibold hover:border-primary hover:text-primary transition-all", $page);
-                    echo $page;
+                    echo wp_kses_post($page);
                     continue;
                 }
 
@@ -224,7 +227,7 @@ if (!function_exists('starter_theme_full_pagination')) {
                     echo '<span class="w-10 h-10 rounded-xl bg-primary text-white flex items-center justify-center text-xs font-bold shadow-md">' . strip_tags($page) . '</span>';
                 } else {
                     $page = str_replace('page-numbers', 'w-10 h-10 rounded-xl bg-white border border-[#e2e6ee] text-[#8892a4] flex items-center justify-center text-xs font-semibold hover:border-primary hover:text-primary transition-all', $page);
-                    echo $page;
+                    echo wp_kses_post($page);
                 }
             }
             echo '</nav>';

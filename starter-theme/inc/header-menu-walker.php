@@ -1,5 +1,4 @@
-﻿<?php
-
+<?php
 /**
  * Custom Menu Walker for the Header Navigation.
  * Uses Alpine.js hover state instead of CSS group-hover
@@ -7,6 +6,10 @@
  *
  * @package starter_theme
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 class Header_Menu_Walker extends Walker_Nav_Menu
 {

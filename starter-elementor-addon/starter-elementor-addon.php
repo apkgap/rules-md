@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * Plugin Name:  Starter Elementor Addon
  * Plugin URI:   https://starter.local
@@ -17,7 +17,7 @@ define( 'STARTER_PATH',    plugin_dir_path( __FILE__ ) );
 define( 'STARTER_URL',     plugin_dir_url( __FILE__ ) );
 define( 'STARTER_VERSION', '1.0.0' );
 
-final class starter_elementor_addon {
+final class Starter_Elementor_Addon {
 
 	private static $instance = null;
 
@@ -35,11 +35,13 @@ final class starter_elementor_addon {
 	}
 
 	public function register_widget_styles() {
+		$css_path = STARTER_PATH . 'assets/css/starter-hero.css';
+		$css_ver  = file_exists( $css_path ) ? filemtime( $css_path ) : STARTER_VERSION;
 		wp_enqueue_style(
 			'starter-starter-hero',
 			STARTER_URL . 'assets/css/starter-hero.css',
 			[],
-			STARTER_VERSION
+			$css_ver
 		);
 	}
 
@@ -97,6 +99,7 @@ function starter_elementor_addon_init() {
 		} );
 		return;
 	}
-	starter_elementor_addon::instance();
+	Starter_Elementor_Addon::instance();
 }
 add_action( 'plugins_loaded', 'starter_elementor_addon_init' );
+

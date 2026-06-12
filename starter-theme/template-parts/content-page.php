@@ -1,4 +1,8 @@
-﻿<?php
+<?php
+if ( ! defined( 'ABSPATH' ) ) {
+    exit; // Exit if accessed directly.
+}
+
 $is_elementor = false;
 if (did_action('elementor/loaded')) {
 	$document = \Elementor\Plugin::$instance->documents->get(get_the_ID());

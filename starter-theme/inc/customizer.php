@@ -1,9 +1,13 @@
-﻿<?php
+<?php
 /**
  * starter_theme Theme Customizer
  *
  * @package starter_theme
  */
+
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; // Exit if accessed directly.
+}
 
 /**
  * Add postMessage support for site title and description for the Theme Customizer.
