@@ -115,7 +115,7 @@ When reviewing code changes or performing verification, ensure the following che
 - **Review Checklists by Component**:
   - **PHP / WordPress Specific**: Verify ABSPATH exists, verify nonces/capabilities, verify context escaping, verify all SQL custom statements utilize `$wpdb->prepare()`.
   - **JavaScript Specific**: Check for DOM presence guards, verify external dependency loads, avoid global namespace pollution, ensure zero inline scripting is introduced.
-  - **Elementor Specific**: Validate parity between `render()` and `content_template()`, check backward compatibility of control IDs, verify styling rules apply in frontend/editor.
+  - **Elementor Specific**: Validate parity between `render()` and `content_template()`, verify 3-file widget structure with inline card markup (zero `card.php`, `get_template_part()`, or `set_query_var()` usage), check backward compatibility of control IDs, and verify styling rules apply in both frontend and editor.
   - **Deployment Specific**: Verify build compiles cleanly, ensure compiled assets are output to `dist/`, check that configuration files exclude node dependencies from build targets.
 
 ## 8. Bug Correction Steps (`fix-bug.md` Action)

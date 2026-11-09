@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 /**
@@ -614,12 +614,74 @@ class STARTER_Widget_starter_Accordion extends \Elementor\Widget_Base {
 		<div class="starter-accordion" data-multi-open="<?php echo esc_attr( $multi_open ); ?>" data-default-open="<?php echo esc_attr( $default_open ); ?>">
 			<?php
 			foreach ( $accordion_items as $index => $item ) {
-				// Pass fields to the separate card component via set_query_var
-				set_query_var( 'accordion_item', $item );
-				set_query_var( 'accordion_index', $index + 1 ); // 1-indexed for matching behavior
-				set_query_var( 'accordion_settings', $settings );
+				if ( empty( $item ) ) {
+					continue;
+				}
 
-				include STARTER_PATH . 'widgets/starter-accordion/card.php';
+				$item_index = intval( $index ) + 1;
+				$is_active  = ( $item_index === $default_open );
+
+				// Build classes
+				$item_classes = [ 'starter-accordion__item' ];
+				if ( $is_active ) {
+					$item_classes[] = 'starter-accordion__item--active';
+				}
+
+				$header_classes   = [ 'starter-accordion__header' ];
+				$icon_position    = ! empty( $settings['icon_position'] ) ? $settings['icon_position'] : 'left';
+				$header_classes[] = 'starter-accordion__header--icon-' . $icon_position;
+
+				// Determine toggle indicator style
+				$toggle_type = ! empty( $settings['toggle_type'] ) ? $settings['toggle_type'] : 'chevron';
+
+				// Question text & Answer text
+				$question = ! empty( $item['question'] ) ? $item['question'] : '';
+				$answer   = ! empty( $item['answer'] ) ? $item['answer'] : '';
+
+				// Icon rendering
+				$icon_html = '';
+				if ( ! empty( $item['selected_icon']['value'] ) ) {
+					ob_start();
+					\Elementor\Icons_Manager::render_icon( $item['selected_icon'], [ 'aria-hidden' => 'true' ] );
+					$icon_html = ob_get_clean();
+				} elseif ( ! empty( $item['icon_class'] ) ) {
+					$icon_html = '<i class="' . esc_attr( $item['icon_class'] ) . '" aria-hidden="true"></i>';
+				}
+				?>
+				<div class="<?php echo esc_attr( implode( ' ', $item_classes ) ); ?>" data-index="<?php echo esc_attr( (string) $item_index ); ?>">
+					<button class="<?php echo esc_attr( implode( ' ', $header_classes ) ); ?>" aria-expanded="<?php echo $is_active ? 'true' : 'false'; ?>">
+						<?php if ( 'left' === $icon_position && $icon_html ) : ?>
+							<span class="starter-accordion__question-icon">
+								<?php echo $icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+							</span>
+						<?php endif; ?>
+
+						<span class="starter-accordion__question-text"><?php echo esc_html( $question ); ?></span>
+
+						<?php if ( 'right' === $icon_position && $icon_html ) : ?>
+							<span class="starter-accordion__question-icon">
+								<?php echo $icon_html; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>
+							</span>
+						<?php endif; ?>
+
+						<?php if ( 'chevron' === $toggle_type ) : ?>
+							<span class="starter-accordion__toggle-icon">
+								<i class="ri-arrow-down-s-line" aria-hidden="true"></i>
+							</span>
+						<?php elseif ( 'plus' === $toggle_type ) : ?>
+							<span class="starter-accordion__toggle-plus"></span>
+						<?php endif; ?>
+					</button>
+
+					<div class="starter-accordion__content-wrapper" style="<?php echo $is_active ? 'display: block;' : 'display: none;'; ?>">
+						<div class="starter-accordion__content">
+							<div class="starter-accordion__answer">
+								<?php echo wp_kses_post( $answer ); ?>
+							</div>
+						</div>
+					</div>
+				</div>
+				<?php
 			}
 			?>
 		</div>

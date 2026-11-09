@@ -16,7 +16,7 @@
    * กฎการทำ SEO/Schema, Accessibility, และ Performance Optimization
 
 2. **[2-ELEMENTOR.md](2-ELEMENTOR.md) - กฎสำหรับ Elementor Widgets**
-   * โครงสร้างไฟล์ที่จำเป็นสำหรับ Elementor Widget (4 ไฟล์หลักในแต่ละ Widget)
+   * โครงสร้างไฟล์ที่จำเป็นสำหรับ Elementor Widget (3 ไฟล์: `.php`, `.css`, `.js` — **ไม่มี `card.php`** markup อยู่ใน `render()` / `content_template()` ทั้งหมด)
    * กฎการซิงค์ค่าระหว่าง PHP `render()` และ JS `content_template()` เพื่อให้การแสดงผลในหน้าบ้าน (Frontend) และหน้าแก้ไข (Elementor Editor Preview) ตรงกัน
    * รายการ Widget ที่มีอยู่และวัตถุประสงค์ เพื่อป้องกันการพัฒนา Widget ที่ซ้ำซ้อนกัน
 
@@ -49,7 +49,7 @@ The development rules are split into 5 main modules:
    * Accessibility, SEO & Schema, and Performance optimization rules.
 
 2. **[2-ELEMENTOR.md](2-ELEMENTOR.md) - Elementor Widgets Guidelines**
-   * Mandatory 4-file structure for Elementor widgets.
+   * Mandatory 3-file structure for Elementor widgets (`.php`, `.css`, `.js`) — **no `card.php`**; markup lives inline in `render()` / `content_template()`.
    * Dual-rendering synchronization rule: parity between PHP `render()` and JS `content_template()` to avoid editor preview discrepancies.
    * Catalog of existing widgets to prevent duplicates and code overlaps.
 

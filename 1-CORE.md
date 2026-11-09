@@ -12,7 +12,8 @@
 ## 2. Core Coding Rules
 - **Theme Templates:** Keep theme templates focused strictly on presentation.
 - **Do Not Place Business Logic Inside Template Parts**: Keep `template-parts/` files strictly focused on presentation.
-- **Do Not Query Posts Directly Inside card.php**: The presentation cards inside `template-parts/cards/` must receive pre-queried database records via `get_query_var()` only. Do not execute instances of `WP_Query` or business logic directly inside cards unless explicitly approved.
+- **Theme Card Partials (`template-parts/cards/`)**: Theme card partials receive pre-queried data via `get_query_var()` only and must not run `WP_Query` or business logic.
+- **No `card.php` in Elementor Widgets**: Elementor widgets must NOT use `card.php`, `set_query_var()`/`get_query_var()`, `include`, or `get_template_part()` for their markup. Card/item markup lives inline in the widget class (`render()` + `content_template()`). See `2-ELEMENTOR.md`.
 - **WP_Query Restriction**: Use `WP_Query` only within the controller layer or widget `render()` methods.
 - **Reusable Logic:** Place reusable business and backend logic in `inc/` (for themes) or `inc/` (for plugins).
 - **Security & Data Sanitization:**

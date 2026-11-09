@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 if ( ! defined( 'ABSPATH' ) ) exit;
 
 class STARTER_Widget_starter_Posts_Tabs extends \Elementor\Widget_Base {
@@ -627,7 +627,7 @@ class STARTER_Widget_starter_Posts_Tabs extends \Elementor\Widget_Base {
 
 				// Wrap post in dynamic show items container
 				echo '<div class="starter-posts-tabs__item starter-posts-tabs__item--show" data-category-slugs="' . esc_attr( $slugs_str ) . '">';
-				get_template_part( 'template-parts/post-card', $settings['layout_type'] );
+				$this->render_post_card( (string) $settings['layout_type'] );
 				echo '</div>';
 			}
 
@@ -660,6 +660,138 @@ class STARTER_Widget_starter_Posts_Tabs extends \Elementor\Widget_Base {
 			echo esc_html__( 'No posts found.', 'starter-elementor-addon' );
 			echo '</div>';
 		}
+	}
+
+	/**
+	 * Render individual post card inline (no card.php or theme partial dependency).
+	 *
+	 * @param string $layout_type 'grid' | 'list' | 'row'.
+	 */
+	protected function render_post_card( string $layout_type ): void {
+		$post_id   = get_the_ID();
+		$permalink = get_permalink( $post_id );
+		$title     = get_the_title( $post_id );
+		$date_str  = function_exists( 'cttm_thai_date' ) ? cttm_thai_date( $post_id, 'short' ) : get_the_date( '', $post_id );
+		$cats      = get_the_category( $post_id );
+
+		if ( 'list' === $layout_type ) {
+			$rel_img = get_the_post_thumbnail_url( $post_id, 'thumbnail' );
+			?>
+			<article id="post-card-sidebar-<?php echo esc_attr( (string) $post_id ); ?>" class="starter-theme-post-card-sidebar starter-theme-post-sidebar group flex gap-5 items-center">
+				<a id="sidebar-img-<?php echo esc_attr( (string) $post_id ); ?>" href="<?php echo esc_url( $permalink ); ?>" class="starter-theme-post-sidebar__image-wrap shrink-0 w-16 h-16 rounded-2xl overflow-hidden bg-surface-base border border-border-base transition-all duration-500 group-hover:scale-105 group-hover:shadow-lg group-hover:shadow-primary/5">
+					<?php if ( $rel_img ) : ?>
+						<img src="<?php echo esc_url( $rel_img ); ?>" alt="<?php echo esc_attr( $title ); ?>" class="starter-theme-post-sidebar__image w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+					<?php else : ?>
+						<div class="starter-theme-post-sidebar__placeholder w-full h-full flex items-center justify-center border border-border-base/10 group-hover:bg-primary/5">
+							<span class="w-5 h-5 text-muted opacity-20 group-hover:text-primary group-hover:opacity-100 transition-all flex items-center justify-center">
+								<i class="ri-arrow-right-line"></i>
+							</span>
+						</div>
+					<?php endif; ?>
+				</a>
+				<div id="sidebar-content-<?php echo esc_attr( (string) $post_id ); ?>" class="starter-theme-post-sidebar__content flex-1 min-w-0">
+					<span id="sidebar-date-<?php echo esc_attr( (string) $post_id ); ?>" class="starter-theme-post-sidebar__date text-sm font-medium text-muted mb-1 block uppercase tracking-wider opacity-60"><?php echo esc_html( $date_str ); ?></span>
+					<h5 id="sidebar-title-<?php echo esc_attr( (string) $post_id ); ?>" class="starter-theme-post-sidebar__title text-sm font-medium text-base leading-tight line-clamp-2 group-hover:text-primary transition-colors duration-300 font-display m-0">
+						<a href="<?php echo esc_url( $permalink ); ?>"><?php echo esc_html( $title ); ?></a>
+					</h5>
+				</div>
+			</article>
+			<?php
+			return;
+		}
+
+		if ( 'row' === $layout_type ) {
+			$tags         = get_the_tags( $post_id );
+			$content      = get_post_field( 'post_content', $post_id );
+			$char_count   = function_exists( 'mb_strlen' ) ? mb_strlen( wp_strip_all_tags( $content ), 'UTF-8' ) : strlen( wp_strip_all_tags( $content ) );
+			$reading_time = max( 1, (int) ceil( $char_count / 800 ) );
+			?>
+			<article id="post-card-row-<?php echo esc_attr( (string) $post_id ); ?>" class="starter-theme-post-card-row starter-theme-post-row group mb-10 md:mb-14 transition-all">
+				<div id="row-inner-<?php echo esc_attr( (string) $post_id ); ?>" class="starter-theme-post-row__inner flex flex-col md:flex-row gap-6 lg:gap-10 items-start">
+					<div id="row-img-wrap-<?php echo esc_attr( (string) $post_id ); ?>" class="starter-theme-post-row__image-wrap w-full md:w-64 lg:w-[320px] shrink-0">
+						<a id="row-img-link-<?php echo esc_attr( (string) $post_id ); ?>" href="<?php echo esc_url( $permalink ); ?>" class="starter-theme-post-row__image-link block relative aspect-16/10 md:aspect-square rounded-4xl md:rounded-[3rem] overflow-hidden shadow-2xl shadow-black/5 transition-all duration-500 group-hover:-translate-y-1 group-hover:shadow-primary/10 border border-border-base/10">
+							<?php if ( has_post_thumbnail( $post_id ) ) : ?>
+								<?php the_post_thumbnail( 'large', [ 'class' => 'w-full h-full object-cover transition-transform duration-1000 group-hover:scale-110' ] ); ?>
+							<?php else : ?>
+								<div class="w-full h-full bg-surface-base flex items-center justify-center">
+									<span class="w-12 h-12 flex items-center justify-center text-muted opacity-20"><i class="ri-arrow-right-line"></i></span>
+								</div>
+							<?php endif; ?>
+							<div class="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+						</a>
+					</div>
+					<div class="flex-1 min-w-0 pt-1">
+						<?php if ( ! empty( $cats ) ) : ?>
+							<div id="row-cat-wrap-<?php echo esc_attr( (string) $post_id ); ?>" class="starter-theme-post-row__category-wrap flex flex-wrap gap-2 mb-4">
+								<span id="row-cat-badge-<?php echo esc_attr( (string) $post_id ); ?>" class="starter-theme-post-row__category px-4 py-1.5 bg-primary/5 text-primary rounded-full text-xs font-light uppercase tracking-widest leading-none border border-primary/10 transition-colors">
+									<?php echo esc_html( $cats[0]->name ); ?>
+								</span>
+							</div>
+						<?php endif; ?>
+						<h3 id="row-title-<?php echo esc_attr( (string) $post_id ); ?>" class="starter-theme-post-row__title font-display text-[22px] md:text-[28px] font-medium text-base leading-tight mb-4 group-hover:text-primary transition-colors duration-300 tracking-tight">
+							<a href="<?php echo esc_url( $permalink ); ?>"><?php echo esc_html( $title ); ?></a>
+						</h3>
+						<div id="row-excerpt-<?php echo esc_attr( (string) $post_id ); ?>" class="starter-theme-post-row__excerpt text-[13px] leading-relaxed mb-5 line-clamp-2 md:line-clamp-3 text-muted/80 opacity-90">
+							<?php echo esc_html( wp_trim_words( get_the_excerpt(), 25, '...' ) ); ?>
+						</div>
+						<div id="row-readmore-<?php echo esc_attr( (string) $post_id ); ?>" class="starter-theme-post-row__readmore mb-6">
+							<a href="<?php echo esc_url( $permalink ); ?>" class="inline-flex items-center gap-1.5 text-xs font-semibold text-primary hover:text-primary/80 transition-colors duration-300 group/btn tracking-wider uppercase">
+								<span><?php echo esc_html__( 'อ่านเพิ่มเติม', 'starter-elementor-addon' ); ?></span>
+								<i class="ri-arrow-right-line transition-transform duration-300 group-hover/btn:translate-x-1"></i>
+							</a>
+						</div>
+						<div id="row-meta-<?php echo esc_attr( (string) $post_id ); ?>" class="starter-theme-post-row__meta flex flex-wrap items-center gap-x-6 gap-y-3 pt-5 border-t border-border-base/40 text-sm font-medium text-muted uppercase tracking-wider">
+							<div id="row-date-<?php echo esc_attr( (string) $post_id ); ?>" class="starter-theme-post-row__date flex items-center gap-2">
+								<span class="w-5 h-5 flex items-center justify-center text-gray-800"><i class="ri-calendar-line"></i></span>
+								<?php echo esc_html( $date_str ); ?>
+							</div>
+							<div class="starter-theme-post-row__reading-time flex items-center gap-2">
+								<span class="w-5 h-5 flex items-center justify-center text-gray-800"><i class="ri-timer-line"></i></span>
+								<?php echo esc_html( (string) $reading_time ); ?> <?php echo esc_html__( 'นาที', 'starter-elementor-addon' ); ?>
+							</div>
+							<?php if ( ! empty( $tags ) ) : ?>
+								<div id="row-tag-<?php echo esc_attr( (string) $post_id ); ?>" class="starter-theme-post-row__tag hidden sm:flex items-center gap-2 max-w-[200px] truncate">
+									<span class="w-5 h-5 flex items-center justify-center text-gray-800"><i class="ri-price-tag-3-line"></i></span>
+									<?php echo esc_html( $tags[0]->name ); ?>
+								</div>
+							<?php endif; ?>
+						</div>
+					</div>
+				</div>
+			</article>
+			<?php
+			return;
+		}
+
+		// Default: 'grid'
+		$thumb_url = get_the_post_thumbnail_url( $post_id, 'medium_large' );
+		?>
+		<article id="post-card-grid-<?php echo esc_attr( (string) $post_id ); ?>" class="starter-theme-post-card-grid starter-theme-post-grid group block space-y-4">
+			<a href="<?php echo esc_url( $permalink ); ?>" class="starter-theme-post-grid__link block">
+				<div id="post-card-grid-img-<?php echo esc_attr( (string) $post_id ); ?>" class="starter-theme-post-grid__image-wrap aspect-16/10 rounded-2xl overflow-hidden border border-border-base/50 shadow-sm transition-all duration-500 group-hover:scale-[1.03] group-hover:shadow-lg group-hover:shadow-primary/5">
+					<?php if ( $thumb_url ) : ?>
+						<img src="<?php echo esc_url( $thumb_url ); ?>" alt="<?php echo esc_attr( $title ); ?>" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+					<?php else : ?>
+						<div class="w-full h-full bg-surface-base flex items-center justify-center">
+							<span class="w-10 h-10 flex items-center justify-center text-muted/20"><i class="ri-arrow-right-line"></i></span>
+						</div>
+					<?php endif; ?>
+				</div>
+			</a>
+			<div id="post-card-grid-content-<?php echo esc_attr( (string) $post_id ); ?>" class="starter-theme-post-grid__content space-y-2 px-1">
+				<div id="post-card-grid-meta-<?php echo esc_attr( (string) $post_id ); ?>" class="starter-theme-post-grid__meta flex items-center gap-3">
+					<span id="post-card-grid-date-<?php echo esc_attr( (string) $post_id ); ?>" class="starter-theme-post-grid__date text-xs font-medium text-primary uppercase tracking-widest"><?php echo esc_html( $date_str ); ?></span>
+					<span class="starter-theme-post-grid__divider w-1 h-1 bg-border-base rounded-full opacity-50"></span>
+					<?php if ( ! empty( $cats ) ) : ?>
+						<span id="post-card-grid-cat-<?php echo esc_attr( (string) $post_id ); ?>" class="starter-theme-post-grid__category text-xs font-light text-muted uppercase tracking-wider"><?php echo esc_html( $cats[0]->name ); ?></span>
+					<?php endif; ?>
+				</div>
+				<h4 id="post-card-grid-title-<?php echo esc_attr( (string) $post_id ); ?>" class="starter-theme-post-grid__title font-medium text-sm leading-snug group-hover:text-primary transition-colors line-clamp-2 m-0 font-display">
+					<a href="<?php echo esc_url( $permalink ); ?>"><?php echo esc_html( $title ); ?></a>
+				</h4>
+			</div>
+		</article>
+		<?php
 	}
 
 	protected function content_template() {
